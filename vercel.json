@@ -28,6 +28,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/v1/:path*",
+      "destination": "https://solar-app-ochre.vercel.app/api/v1/:path*"
+    },
+    {
       "source": "/((?!api/|login\\.html|favicon\\.ico|robots\\.txt|.*\\..*).*)",
       "destination": "/index.html"
     }
