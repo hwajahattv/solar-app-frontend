@@ -48,7 +48,7 @@ export class EnergyFlowDiagram {
       {
         id: 'grid',
         widePath: 'M 16 18 C 34 18, 34 50, 50 50',
-        stackPath: 'M 16 13 C 16 30, 50 30, 50 48',
+        stackPath: 'M 17 18 C 17 34, 50 34, 50 50',
         active: flow.grid.online,
         reversed: false,
         accent: 'grid',
@@ -56,7 +56,7 @@ export class EnergyFlowDiagram {
       {
         id: 'solar',
         widePath: 'M 16 50 L 50 50',
-        stackPath: 'M 50 13 L 50 48',
+        stackPath: 'M 50 18 L 50 50',
         active: flow.solar.active,
         reversed: false,
         accent: 'solar',
@@ -64,7 +64,7 @@ export class EnergyFlowDiagram {
       {
         id: 'battery',
         widePath: 'M 16 82 C 34 82, 34 50, 50 50',
-        stackPath: 'M 84 13 C 84 30, 50 30, 50 48',
+        stackPath: 'M 83 18 C 83 34, 50 34, 50 50',
         active: flow.battery.active,
         reversed: batteryCharging,
         accent: batteryCharging ? 'battery-charge' : 'battery',
@@ -72,7 +72,7 @@ export class EnergyFlowDiagram {
       {
         id: 'load',
         widePath: 'M 50 50 L 84 50',
-        stackPath: 'M 50 48 L 50 86',
+        stackPath: 'M 50 50 L 50 82',
         active: flow.load.active,
         reversed: false,
         accent: 'load',
