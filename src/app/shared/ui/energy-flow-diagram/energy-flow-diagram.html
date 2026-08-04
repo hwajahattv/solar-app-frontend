@@ -39,7 +39,9 @@
       <mat-icon class="diagram__icon">{{ node.icon }}</mat-icon>
       <span class="diagram__label">{{ node.label }}</span>
       <span class="diagram__primary" [class.diagram__primary--hero]="node.hero">{{ node.primary }}</span>
-      <span class="diagram__secondary">{{ node.secondary }}</span>
+      @if (node.secondary) {
+        <span class="diagram__secondary">{{ node.secondary }}</span>
+      }
 
       @if (node.key === 'battery') {
         <div class="diagram__battery">

@@ -9,7 +9,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
-  min-height: 34rem;
+  min-height: 32rem;
   background: var(--knox-surface-sunken);
   border: 1px solid var(--knox-border);
   border-radius: var(--knox-radius-md);
@@ -79,12 +79,14 @@
   flex-direction: column;
   align-items: center;
   gap: 0.1rem;
-  padding: var(--knox-space-sm);
+  padding: 0.45rem 0.4rem;
   text-align: center;
   background: var(--knox-surface-raised);
   border: 1px solid var(--knox-border);
   border-radius: var(--knox-radius-md);
   opacity: 0.55;
+  box-sizing: border-box;
+  max-width: calc(100% - 0.5rem);
   transition:
     border-color var(--knox-transition),
     box-shadow var(--knox-transition),
@@ -103,13 +105,13 @@
   }
 
   // Portrait anchors: sources across the top, inverter centre, house bottom.
-  width: min(30%, 8.5rem);
+  width: min(26%, 7.25rem);
 
-  &[data-position='grid'] { left: 17%; top: 15%; }
-  &[data-position='solar'] { left: 50%; top: 15%; }
-  &[data-position='battery'] { left: 83%; top: 15%; }
-  &[data-position='inverter'] { left: 50%; top: 52%; width: min(46%, 11rem); }
-  &[data-position='load'] { left: 50%; top: 86%; width: min(52%, 13rem); }
+  &[data-position='grid'] { left: 16%; top: 13%; }
+  &[data-position='solar'] { left: 50%; top: 13%; }
+  &[data-position='battery'] { left: 84%; top: 13%; }
+  &[data-position='inverter'] { left: 50%; top: 48%; width: min(48%, 11rem); }
+  &[data-position='load'] { left: 50%; top: 86%; width: min(56%, 12rem); }
 }
 
 .diagram__node--active {
@@ -126,9 +128,9 @@
 
 .diagram__icon {
   color: var(--node-accent);
-  font-size: 1.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  font-size: 1.35rem;
+  width: 1.35rem;
+  height: 1.35rem;
 }
 
 .diagram__label {
@@ -143,10 +145,11 @@
   font-variant-numeric: tabular-nums;
   color: var(--mat-sys-on-surface);
   overflow-wrap: anywhere;
+  line-height: 1.15;
 }
 
 .diagram__primary--hero {
-  font: var(--mat-sys-headline-small);
+  font: var(--mat-sys-title-large);
   color: var(--knox-load);
 }
 
@@ -154,6 +157,13 @@
   font: var(--mat-sys-body-small);
   color: var(--mat-sys-on-surface-variant);
   overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  line-height: 1.2;
+  max-width: 100%;
 }
 
 /* --- Battery bar inside the battery node ---------------------------------- */
@@ -161,8 +171,8 @@
 .diagram__battery {
   position: relative;
   width: 100%;
-  height: 1.15rem;
-  margin-top: 0.2rem;
+  height: 1rem;
+  margin-top: 0.15rem;
   border-radius: 999px;
   overflow: hidden;
   background: var(--knox-surface-sunken);
@@ -190,6 +200,138 @@
   font-size: 0.8rem;
   width: 0.8rem;
   height: 0.8rem;
+}
+
+/* --- Phone / narrow column: vertical cards (no absolute overlap) --------- */
+
+@container flowdiagram (max-width: 519px) {
+  .diagram {
+    aspect-ratio: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: var(--knox-space-sm);
+    overflow: visible;
+  }
+
+  .diagram__wires {
+    display: none;
+  }
+
+  .diagram__node {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.2rem 0.55rem;
+    padding: 0.7rem 0.8rem;
+    text-align: left;
+    opacity: 1;
+
+    &[data-position='solar'] { order: 1; }
+    &[data-position='grid'] { order: 2; }
+    &[data-position='battery'] { order: 3; }
+    &[data-position='inverter'] { order: 4; }
+    &[data-position='load'] { order: 5; }
+  }
+
+  // Flow direction cue between stacked cards.
+  .diagram__node:not([data-position='load'])::after {
+    content: '';
+    position: absolute;
+    left: 1.35rem;
+    bottom: -0.7rem;
+    width: 2px;
+    height: 0.55rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--node-accent) 70%, transparent);
+    pointer-events: none;
+  }
+
+  .diagram__node:not([data-position='load'])::before {
+    content: '';
+    position: absolute;
+    left: 1.2rem;
+    bottom: -0.85rem;
+    width: 0;
+    height: 0;
+    border-left: 0.28rem solid transparent;
+    border-right: 0.28rem solid transparent;
+    border-top: 0.32rem solid color-mix(in srgb, var(--node-accent) 70%, transparent);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .diagram__icon {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .diagram__label {
+    min-width: 4.25rem;
+    text-align: left;
+  }
+
+  .diagram__primary {
+    margin-left: auto;
+    text-align: right;
+    font: var(--mat-sys-title-medium);
+  }
+
+  .diagram__primary--hero {
+    font: var(--mat-sys-headline-small);
+  }
+
+  .diagram__secondary {
+    flex: 1 1 100%;
+    padding-left: calc(1.5rem + 0.55rem);
+    -webkit-line-clamp: 1;
+    text-align: left;
+  }
+
+  .diagram__battery {
+    flex: 1 1 100%;
+    height: 1.2rem;
+    margin-top: 0.1rem;
+  }
+
+  // SOC already shown in the bar on the compact row.
+  .diagram__node[data-position='battery'] .diagram__primary {
+    display: none;
+  }
+}
+
+/* --- Mid-width portrait (tablet column / large phone landscape) ---------- */
+
+@container flowdiagram (min-width: 520px) and (max-width: 619px) {
+  .diagram {
+    aspect-ratio: 3 / 5;
+    min-height: 30rem;
+  }
+
+  .diagram__node {
+    width: min(28%, 8rem);
+    padding: var(--knox-space-sm);
+
+    &[data-position='grid'] { left: 16%; top: 12%; }
+    &[data-position='solar'] { left: 50%; top: 12%; }
+    &[data-position='battery'] { left: 84%; top: 12%; }
+    &[data-position='inverter'] { left: 50%; top: 48%; width: min(46%, 11rem); }
+    &[data-position='load'] { left: 50%; top: 86%; width: min(52%, 12rem); }
+  }
+
+  .diagram__node[data-position='battery'] .diagram__primary {
+    display: none;
+  }
 }
 
 /* --- Wide layout ---------------------------------------------------------- */
@@ -224,5 +366,6 @@
   .diagram__label { font: var(--mat-sys-label-medium); }
   .diagram__primary { font: var(--mat-sys-title-medium); }
   .diagram__primary--hero { font: var(--mat-sys-headline-medium); }
+  .diagram__secondary { -webkit-line-clamp: 3; }
   .diagram__battery { height: 1.35rem; }
 }
