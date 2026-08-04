@@ -92,9 +92,13 @@ export async function verifyGateToken(token: string | undefined | null, secret: 
   return timingSafeEqualString(toBase64Url(expected), sigB64);
 }
 
-export function buildGateCookie(token: string, maxAgeSeconds = GATE_MAX_AGE_SECONDS): string {
+export function buildGateCookie(
+  token: string,
+  maxAgeSeconds = GATE_MAX_AGE_SECONDS,
+  cookieName = GATE_COOKIE,
+): string {
   const parts = [
-    `${GATE_COOKIE}=${token}`,
+    `${cookieName}=${token}`,
     'Path=/',
     'HttpOnly',
     'Secure',

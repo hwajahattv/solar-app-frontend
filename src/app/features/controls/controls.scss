@@ -4,6 +4,43 @@
   gap: var(--knox-space-md);
 }
 
+.unlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--knox-space-md);
+  max-width: 28rem;
+  margin: var(--knox-space-xl) auto 0;
+  text-align: center;
+}
+
+.unlock__icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 2.5rem;
+  color: var(--mat-sys-primary);
+}
+
+.unlock__title {
+  margin: 0;
+  font: var(--mat-sys-headline-small);
+}
+
+.unlock__lead {
+  margin: 0;
+}
+
+.unlock__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--knox-space-md);
+  width: 100%;
+}
+
+.unlock__field {
+  width: 100%;
+}
+
 .profile__steps {
   margin: 0;
 }

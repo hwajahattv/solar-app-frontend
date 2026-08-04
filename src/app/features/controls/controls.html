@@ -2,138 +2,184 @@
   <header class="knox-row">
     <h2 class="knox-section-title">Inverter settings</h2>
     <span class="knox-spacer"></span>
-    <button mat-stroked-button type="button" (click)="reload()">
-      <mat-icon>refresh</mat-icon>
-      Reload
-    </button>
+    @if (access.unlocked()) {
+      <button mat-stroked-button type="button" (click)="lockSettings()">
+        <mat-icon>lock</mat-icon>
+        Lock
+      </button>
+      <button mat-stroked-button type="button" (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+        Reload
+      </button>
+    }
   </header>
 
-  <app-status-banner
-    title="These settings change the inverter hardware"
-    detail="Field definitions load when you open this page. Live values are read one at a time — click Read current on each setting you need."
-    tone="warn"
-    icon="warning"
-  />
+  @if (!access.checked()) {
+    <app-status-banner title="Checking settings access…" [busy]="true" />
+  } @else if (!access.unlocked()) {
+    <section class="unlock knox-card">
+      <mat-icon class="unlock__icon" aria-hidden="true">lock</mat-icon>
+      <h3 class="unlock__title">Password required</h3>
+      <p class="knox-muted unlock__lead">
+        Inverter settings change live hardware behaviour. Enter the settings password to continue.
+      </p>
 
-  <section class="knox-card profile">
-    <div class="knox-row">
-      <div>
-        <h3 class="knox-section-title">Preferred profile</h3>
-        <span class="knox-muted">Applies the recommended configuration in one step.</span>
-      </div>
-      <span class="knox-spacer"></span>
-      <button mat-flat-button type="button" [disabled]="applyingProfile()" (click)="applyProfile()">
-        @if (applyingProfile()) {
-          <mat-spinner diameter="18" />
-        } @else {
-          <mat-icon>auto_fix_high</mat-icon>
+      <form class="unlock__form" (ngSubmit)="submitUnlock()">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic" class="unlock__field">
+          <mat-label>Settings password</mat-label>
+          <input
+            matInput
+            type="password"
+            autocomplete="current-password"
+            [ngModel]="passwordDraft()"
+            (ngModelChange)="passwordDraft.set($event)"
+            name="controlsPassword"
+            required
+          />
+        </mat-form-field>
+
+        @if (access.error(); as message) {
+          <app-status-banner title="Access denied" [detail]="message" tone="error" icon="error" />
         }
-        Apply profile
-      </button>
-    </div>
 
-    <div class="knox-grid profile__steps">
-      @for (step of profileSteps(); track step.id; let i = $index) {
-        <div class="knox-card profile__step" [attr.data-state]="profileResult()?.steps?.[i]?.success">
-          <span class="knox-muted">{{ i + 1 }}. {{ step.name }}</span>
-          <strong>{{ step.label }}</strong>
-          @if (profileResult()?.steps?.[i]; as result) {
-            <span class="profile__status" [class.profile__status--error]="!result.success">
-              {{ result.success ? 'Applied' : result.message }}
-            </span>
+        <button mat-flat-button type="submit" [disabled]="access.unlocking() || !passwordDraft().trim()">
+          @if (access.unlocking()) {
+            <mat-spinner diameter="18" />
+          } @else {
+            <mat-icon>lock_open</mat-icon>
           }
+          Unlock settings
+        </button>
+      </form>
+    </section>
+  } @else {
+    <app-status-banner
+      title="These settings change the inverter hardware"
+      detail="Field definitions load when you unlock this page. Live values are read one at a time — click Read current on each setting you need."
+      tone="warn"
+      icon="warning"
+    />
+
+    <section class="knox-card profile">
+      <div class="knox-row">
+        <div>
+          <h3 class="knox-section-title">Preferred profile</h3>
+          <span class="knox-muted">Applies the recommended configuration in one step.</span>
         </div>
-      }
-    </div>
-  </section>
-
-  @if (error(); as message) {
-    <app-status-banner title="Settings unavailable" [detail]="message" tone="error" icon="error" />
-  } @else if (loading()) {
-    <app-status-banner title="Loading inverter settings…" [busy]="true" />
-  } @else if (fields().length === 0) {
-    <app-status-banner title="This inverter exposes no writable settings" tone="warn" icon="block" />
-  }
-
-  <div class="knox-grid knox-grid--wide">
-    @for (field of fields(); track field.id) {
-      <section class="knox-card field">
-        <h3 class="field__title">{{ field.name }}</h3>
-
-        @if (isLoaded(field.id) && displayLabel(field); as currentLabel) {
-          <span class="field__current knox-muted">Current on inverter: {{ currentLabel }}</span>
-        } @else {
-          <span class="field__current knox-muted">Not loaded — click Read current to fetch the live value.</span>
-        }
-
-        @switch (field.inputType) {
-          @case ('toggle') {
-            <mat-radio-group
-              class="field__radios"
-              [ngModel]="draftValue(field.id)"
-              (ngModelChange)="setDraft(field.id, $event)"
-              [name]="field.id"
-            >
-              @for (option of field.options; track option.value) {
-                <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
-              }
-            </mat-radio-group>
+        <span class="knox-spacer"></span>
+        <button mat-flat-button type="button" [disabled]="applyingProfile()" (click)="applyProfile()">
+          @if (applyingProfile()) {
+            <mat-spinner diameter="18" />
+          } @else {
+            <mat-icon>auto_fix_high</mat-icon>
           }
-          @case ('select') {
-            <mat-form-field appearance="outline" subscriptSizing="dynamic">
-              <mat-label>Value</mat-label>
-              <mat-select
+          Apply profile
+        </button>
+      </div>
+
+      <div class="knox-grid profile__steps">
+        @for (step of profileSteps(); track step.id; let i = $index) {
+          <div class="knox-card profile__step" [attr.data-state]="profileResult()?.steps?.[i]?.success">
+            <span class="knox-muted">{{ i + 1 }}. {{ step.name }}</span>
+            <strong>{{ step.label }}</strong>
+            @if (profileResult()?.steps?.[i]; as result) {
+              <span class="profile__status" [class.profile__status--error]="!result.success">
+                {{ result.success ? 'Applied' : result.message }}
+              </span>
+            }
+          </div>
+        }
+      </div>
+    </section>
+
+    @if (error(); as message) {
+      <app-status-banner title="Settings unavailable" [detail]="message" tone="error" icon="error" />
+    } @else if (loading()) {
+      <app-status-banner title="Loading inverter settings…" [busy]="true" />
+    } @else if (fields().length === 0) {
+      <app-status-banner title="This inverter exposes no writable settings" tone="warn" icon="block" />
+    }
+
+    <div class="knox-grid knox-grid--wide">
+      @for (field of fields(); track field.id) {
+        <section class="knox-card field">
+          <h3 class="field__title">{{ field.name }}</h3>
+
+          @if (isLoaded(field.id) && displayLabel(field); as currentLabel) {
+            <span class="field__current knox-muted">Current on inverter: {{ currentLabel }}</span>
+          } @else {
+            <span class="field__current knox-muted">Not loaded — click Read current to fetch the live value.</span>
+          }
+
+          @switch (field.inputType) {
+            @case ('toggle') {
+              <mat-radio-group
+                class="field__radios"
                 [ngModel]="draftValue(field.id)"
                 (ngModelChange)="setDraft(field.id, $event)"
-                placeholder="Choose a value"
+                [name]="field.id"
               >
                 @for (option of field.options; track option.value) {
-                  <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                  <mat-radio-button [value]="option.value">{{ option.label }}</mat-radio-button>
                 }
-              </mat-select>
-            </mat-form-field>
-          }
-          @default {
-            <mat-form-field appearance="outline" subscriptSizing="dynamic">
-              <mat-label>Value</mat-label>
-              <input
-                matInput
-                type="text"
-                [ngModel]="draftValue(field.id) ?? ''"
-                (ngModelChange)="setDraft(field.id, $event)"
-                [placeholder]="field.hint ?? 'Read current or enter a value'"
-              />
-            </mat-form-field>
-          }
-        }
-
-        @if (field.hint) {
-          <span class="knox-muted">{{ field.hint }}</span>
-        }
-
-        <div class="field__actions">
-          <button
-            mat-stroked-button
-            type="button"
-            [disabled]="busyFieldId() === field.id"
-            (click)="readCurrent(field)"
-          >
-            @if (busyFieldId() === field.id) {
-              <mat-spinner diameter="18" />
-            } @else {
-              Read current
+              </mat-radio-group>
             }
-          </button>
-          <button
-            mat-flat-button
-            type="button"
-            [disabled]="busyFieldId() === field.id || !draftValue(field.id)"
-            (click)="apply(field)"
-          >
-            Apply
-          </button>
-        </div>
-      </section>
-    }
-  </div>
+            @case ('select') {
+              <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Value</mat-label>
+                <mat-select
+                  [ngModel]="draftValue(field.id)"
+                  (ngModelChange)="setDraft(field.id, $event)"
+                  placeholder="Choose a value"
+                >
+                  @for (option of field.options; track option.value) {
+                    <mat-option [value]="option.value">{{ option.label }}</mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            }
+            @default {
+              <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Value</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  [ngModel]="draftValue(field.id) ?? ''"
+                  (ngModelChange)="setDraft(field.id, $event)"
+                  [placeholder]="field.hint ?? 'Read current or enter a value'"
+                />
+              </mat-form-field>
+            }
+          }
+
+          @if (field.hint) {
+            <span class="knox-muted">{{ field.hint }}</span>
+          }
+
+          <div class="field__actions">
+            <button
+              mat-stroked-button
+              type="button"
+              [disabled]="busyFieldId() === field.id"
+              (click)="readCurrent(field)"
+            >
+              @if (busyFieldId() === field.id) {
+                <mat-spinner diameter="18" />
+              } @else {
+                Read current
+              }
+            </button>
+            <button
+              mat-flat-button
+              type="button"
+              [disabled]="busyFieldId() === field.id || !draftValue(field.id)"
+              (click)="apply(field)"
+            >
+              Apply
+            </button>
+          </div>
+        </section>
+      }
+    </div>
+  }
 </div>

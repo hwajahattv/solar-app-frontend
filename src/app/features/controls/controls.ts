@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal, untracked } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal, untracked } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -14,6 +14,7 @@ import { ControlsApiService } from '../../core/api/controls-api.service';
 import { ControlField, ProfileResult, ProfileStep } from '../../core/models/control.model';
 import { DeviceRef } from '../../core/models/device.model';
 import { NotificationService } from '../../core/notifications/notification.service';
+import { ControlsAccessService } from '../../core/state/controls-access.service';
 import { DeviceStore } from '../../core/state/device.store';
 import { ConfirmDialog, ConfirmDialogData } from '../../shared/ui/confirm-dialog/confirm-dialog';
 import { StatusBanner } from '../../shared/ui/status-banner/status-banner';
@@ -36,11 +37,14 @@ import { StatusBanner } from '../../shared/ui/status-banner/status-banner';
   templateUrl: './controls.html',
   styleUrl: './controls.scss',
 })
-export class Controls {
+export class Controls implements OnInit {
   private readonly api = inject(ControlsApiService);
   private readonly devices = inject(DeviceStore);
   private readonly dialog = inject(MatDialog);
   private readonly notifications = inject(NotificationService);
+  protected readonly access = inject(ControlsAccessService);
+
+  protected readonly passwordDraft = signal('');
 
   protected readonly fields = signal<ControlField[]>([]);
   protected readonly loading = signal(false);
@@ -59,19 +63,45 @@ export class Controls {
   constructor() {
     effect(() => {
       const device = this.devices.selectedRef();
-      if (!device) return;
+      const unlocked = this.access.unlocked();
+      if (!device || !unlocked) return;
       untracked(() => this.loadFields(device));
     });
 
-    this.api.preferredProfile().subscribe({
-      next: (profile) => this.profileSteps.set(profile.steps),
-      error: () => this.profileSteps.set([]),
+    effect(() => {
+      if (!this.access.unlocked()) return;
+      untracked(() => {
+        this.api.preferredProfile().subscribe({
+          next: (profile) => this.profileSteps.set(profile.steps),
+          error: () => this.profileSteps.set([]),
+        });
+      });
     });
+  }
+
+  ngOnInit(): void {
+    void this.access.refresh();
+  }
+
+  protected async submitUnlock(): Promise<void> {
+    const ok = await this.access.unlock(this.passwordDraft());
+    if (ok) {
+      this.passwordDraft.set('');
+      this.notifications.success('Settings unlocked.');
+    }
+  }
+
+  protected async lockSettings(): Promise<void> {
+    await this.access.lock();
+    this.fields.set([]);
+    this.draft.set({});
+    this.loadedFromDevice.set({});
+    this.notifications.info('Settings locked.');
   }
 
   protected reload(): void {
     const device = this.devices.selectedRef();
-    if (device) this.loadFields(device);
+    if (device && this.access.unlocked()) this.loadFields(device);
   }
 
   protected setDraft(fieldId: string, value: string | null | undefined): void {
