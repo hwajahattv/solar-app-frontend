@@ -48,6 +48,19 @@
         <mat-icon>account_circle</mat-icon>
       </span>
     }
+
+    @if (showPinLock()) {
+      <button
+        mat-icon-button
+        type="button"
+        (click)="lockDashboard()"
+        [disabled]="locking()"
+        matTooltip="Lock dashboard"
+        aria-label="Lock dashboard"
+      >
+        <mat-icon>lock</mat-icon>
+      </button>
+    }
   </mat-toolbar>
 
   <div class="shell__body">

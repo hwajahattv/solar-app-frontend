@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests (Angular)
+        run: npm test -- --watch=false
+
+      - name: PIN gate tests
+        run: npm run test:pin
+
+      - name: Production build
+        env:
+          API_BASE_URL: https://example.com/api/v1
+        run: npm run build

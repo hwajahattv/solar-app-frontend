@@ -1,11 +1,10 @@
 export const environment = {
   production: true,
   /**
-   * Relative by default so the SPA works behind any reverse proxy. A native
-   * mobile or TV shell overrides this by providing API_BASE_URL with the
-   * absolute gateway URL.
+   * Absolute gateway URL. Injected at build time by scripts/write-env.mjs
+   * from the API_BASE_URL environment variable.
    */
-  apiBaseUrl: '/api/v1',
+  apiBaseUrl: "https://solar-app-ochre.vercel.app/api/v1",
   /** Default polling interval for live telemetry, in milliseconds. */
   defaultRefreshIntervalMs: 5000,
 };

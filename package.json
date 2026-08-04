@@ -4,12 +4,17 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "node scripts/write-env.mjs && ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:pin": "vitest run --config vitest.pin.config.ts",
+    "lint": "ng lint"
   },
   "private": true,
   "packageManager": "npm@10.9.8",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "@angular/cdk": "^22.1.0",
     "@angular/common": "^22.1.0",
@@ -19,16 +24,23 @@
     "@angular/material": "^22.1.0",
     "@angular/platform-browser": "^22.1.0",
     "@angular/router": "^22.1.0",
+    "@vercel/edge": "^1.3.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@angular-eslint/builder": "^22.1.0",
     "@angular/build": "^22.1.2",
     "@angular/cli": "^22.1.2",
     "@angular/compiler-cli": "^22.1.0",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.1.2",
+    "angular-eslint": "^22.1.0",
+    "eslint": "^10.8.0",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
     "typescript": "~6.0.2",
+    "typescript-eslint": "^8.66.0",
     "vitest": "^4.0.8"
   }
 }

@@ -3,15 +3,69 @@
 Angular 22 single-page app using Angular Material with a dark theme, designed so
 the same UI concepts carry over to a mobile and TV app later.
 
-## Running
+## Running locally
+
+Requires **Node.js 22+**.
 
 ```bash
 npm install
 npm start        # http://localhost:4200
 ```
 
-`/api` is proxied to `http://localhost:3000` in development (`proxy.conf.json`),
-so run the backend alongside it.
+Development uses an absolute API base of `http://localhost:3000/api/v1`
+([`src/environments/environment.development.ts`](src/environments/environment.development.ts)).
+Run the gateway locally, or change that file to point at a remote gateway.
+
+`proxy.conf.json` still proxies `/api` → `http://localhost:3000` if you switch the
+dev base URL back to a relative `/api/v1`.
+
+```bash
+npm run lint
+npm test
+npm run test:pin
+npm run build
+```
+
+## Deploy on Vercel
+
+1. Import this repo into Vercel (Framework Preset: **Other**).
+2. Build settings are in [`vercel.json`](vercel.json):
+   - Build command: `npm run build`
+   - Output directory: `dist/frontend/browser`
+3. Set environment variables (Project → Settings → Environment Variables):
+
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `API_BASE_URL` | Yes | Absolute gateway base, e.g. `https://your-gateway.example.com/api/v1` |
+| `APP_PIN` | Yes (Production) | Access PIN users type on `/login.html` |
+| `PIN_SECRET` | Yes (Production) | Long random string used to sign the `knox_gate` cookie |
+
+4. Deploy. Unauthenticated visitors are redirected to `/login.html`.
+
+Copy [`.env.example`](.env.example) for a local checklist — never commit real secrets.
+
+### How the PIN is set and rotated
+
+1. In the Vercel dashboard, set `APP_PIN` (and `PIN_SECRET` if missing).
+2. Redeploy the project (env changes apply on the next deployment).
+3. Existing unlocked browsers keep working until their cookie expires (7 days) or
+   they use **Lock** in the toolbar / clear site data.
+4. To force everyone to re-enter the PIN immediately, change `PIN_SECRET` and redeploy
+   (invalidates all signed cookies).
+
+There is **no user database**. This is a soft access gate for a private dashboard.
+The absolute API origin is still reachable if someone knows the URL; gateway
+credentials remain on the backend.
+
+### Testing the PIN gate locally
+
+`ng serve` does not run Vercel Edge middleware. To exercise the PIN wall:
+
+```bash
+npx vercel dev
+```
+
+with `APP_PIN` and `PIN_SECRET` in a local `.env` (gitignored).
 
 ## Structure
 
@@ -22,10 +76,16 @@ src/app/
 │   ├── models/      Interfaces mirroring the gateway DTOs
 │   ├── state/       Signal stores (session, devices, refresh clock, telemetry)
 │   ├── platform/    Surface detection and remote-control navigation
+│   ├── errors/      Global ErrorHandler → snackbar
 │   └── interceptors/
 ├── shared/ui/       Presentational components with inputs only
 ├── layout/          Application shell and navigation
 └── features/        Route-level screens
+
+api/pin/             Vercel Edge unlock/lock routes
+lib/pin-gate.ts      Shared PIN cookie crypto (Edge + tests)
+middleware.ts        Vercel Edge PIN gate
+public/login.html    Standalone unlock page (outside the Angular bundle)
 ```
 
 Feature components hold no ShineMonitor knowledge. They read signals from stores
@@ -69,8 +129,22 @@ colours (grid, solar, battery, load) are semantic tokens in
 `src/theme/_tokens.scss` and identify a source consistently across the diagram,
 the tiles and the status pills.
 
+## Docker (optional)
+
+[`Dockerfile`](Dockerfile) + [`nginx.conf`](nginx.conf) remain available for
+container deploys. Production builds embed an absolute `API_BASE_URL`, so the
+nginx `/api/` reverse proxy is optional when the SPA talks to the gateway
+directly. For Docker builds, pass the URL at build time:
+
+```bash
+docker build --build-arg API_BASE_URL=https://your-gateway.example.com/api/v1 .
+```
+
+(Wire `ARG`/`ENV` into the Dockerfile if you use that path regularly.)
+
 ## Testing
 
 ```bash
-npm test
+npm test           # Angular unit tests (Vitest)
+npm run test:pin   # Edge PIN helper tests
 ```
