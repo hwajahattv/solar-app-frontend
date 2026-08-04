@@ -13,14 +13,14 @@ import {
 } from './pin-gate';
 
 describe('pin-gate', () => {
-  const previousPin = process.env.APP_PIN;
-  const previousSecret = process.env.PIN_SECRET;
+  const previousPin = process.env['APP_PIN'];
+  const previousSecret = process.env['PIN_SECRET'];
 
   afterEach(() => {
-    if (previousPin === undefined) delete process.env.APP_PIN;
-    else process.env.APP_PIN = previousPin;
-    if (previousSecret === undefined) delete process.env.PIN_SECRET;
-    else process.env.PIN_SECRET = previousSecret;
+    if (previousPin === undefined) delete process.env['APP_PIN'];
+    else process.env['APP_PIN'] = previousPin;
+    if (previousSecret === undefined) delete process.env['PIN_SECRET'];
+    else process.env['PIN_SECRET'] = previousSecret;
   });
 
   it('compares PIN strings in constant-time fashion', () => {
@@ -30,15 +30,15 @@ describe('pin-gate', () => {
   });
 
   it('reads APP_PIN and PIN_SECRET from the environment', () => {
-    process.env.APP_PIN = '654321';
-    process.env.PIN_SECRET = 'unit-test-secret';
+    process.env['APP_PIN'] = '654321';
+    process.env['PIN_SECRET'] = 'unit-test-secret';
     expect(getConfiguredPin()).toBe('654321');
     expect(getPinSecret()).toBe('unit-test-secret');
   });
 
   it('falls back to a derived secret when PIN_SECRET is unset', () => {
-    process.env.APP_PIN = '654321';
-    delete process.env.PIN_SECRET;
+    process.env['APP_PIN'] = '654321';
+    delete process.env['PIN_SECRET'];
     expect(getPinSecret()).toBe('knox-pin-fallback:654321');
   });
 

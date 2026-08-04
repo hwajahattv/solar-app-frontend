@@ -5,6 +5,7 @@ import {
   getConfiguredPin,
   getPinSecret,
   readCookie,
+  readEnv,
   verifyGateToken,
 } from './lib/pin-gate';
 
@@ -38,7 +39,7 @@ export default async function middleware(request: Request): Promise<Response> {
   // Local `vercel dev` without env: allow through so the SPA remains usable.
   // Production should always set APP_PIN.
   if (!pin || !secret) {
-    if (process.env.VERCEL_ENV === 'production') {
+    if (readEnv('VERCEL_ENV') === 'production') {
       return new Response('PIN gate is not configured (set APP_PIN and PIN_SECRET).', {
         status: 503,
         headers: { 'Content-Type': 'text/plain; charset=utf-8' },

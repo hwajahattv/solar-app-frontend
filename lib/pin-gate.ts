@@ -8,12 +8,20 @@ export const GATE_MAX_AGE_SECONDS = 60 * 60 * 24 * 7; // 7 days
 
 const encoder = new TextEncoder();
 
+/** Edge-safe env read — avoids depending on Node typings in the Angular tsconfig. */
+export function readEnv(name: string): string {
+  const runtime = globalThis as typeof globalThis & {
+    process?: { env?: Record<string, string | undefined> };
+  };
+  return (runtime.process?.env?.[name] ?? '').trim();
+}
+
 export function getConfiguredPin(): string {
-  return (process.env.APP_PIN ?? '').trim();
+  return readEnv('APP_PIN');
 }
 
 export function getPinSecret(): string {
-  const explicit = (process.env.PIN_SECRET ?? '').trim();
+  const explicit = readEnv('PIN_SECRET');
   if (explicit) return explicit;
   const pin = getConfiguredPin();
   // Fallback keeps local/preview usable; production should set PIN_SECRET.
