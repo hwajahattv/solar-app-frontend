@@ -1,0 +1,65 @@
+/**
+ * Per-surface scaling.
+ *
+ * Angular Material's M3 typography tokens are declared in `rem`, so changing the
+ * root font size rescales the entire component library along with our own
+ * tokens. That is what turns the same components into a ten-foot TV UI.
+ */
+
+html {
+  font-size: 16px;
+}
+
+html.surface-handset {
+  font-size: 15px;
+  --knox-space-unit: 7px;
+  --knox-radius-md: 14px;
+  --knox-content-max: 100%;
+}
+
+html.surface-tablet {
+  font-size: 16px;
+  --knox-space-unit: 8px;
+}
+
+html.surface-desktop {
+  font-size: 16px;
+  --knox-space-unit: 8px;
+}
+
+html.surface-tv {
+  /* Larger base size, wider spacing and a heavy focus ring for remote control use. */
+  font-size: 22px;
+  --knox-space-unit: 12px;
+  --knox-radius-md: 20px;
+  --knox-radius-lg: 32px;
+  --knox-focus-width: 4px;
+  --knox-content-max: 100%;
+
+  /* Keep content clear of the bezel on TVs that still overscan. */
+  --knox-overscan-x: 3vw;
+  --knox-overscan-y: 2vh;
+}
+
+/* Touch surfaces need targets that comfortably clear the 48px guideline. */
+html.surface-handset,
+html.surface-tablet {
+  button,
+  [role='button'],
+  a.knox-nav-item {
+    min-height: 48px;
+  }
+}
+
+/* On TV, focus is the only affordance — make it unmistakable. */
+html.surface-tv {
+  *:focus-visible {
+    outline: var(--knox-focus-width) solid var(--knox-focus-color);
+    outline-offset: 3px;
+    border-radius: var(--knox-radius-sm);
+  }
+
+  .knox-card:focus-within {
+    box-shadow: 0 0 0 var(--knox-focus-width) var(--knox-focus-color);
+  }
+}

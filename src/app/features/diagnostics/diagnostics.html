@@ -1,0 +1,69 @@
+<div class="knox-page">
+  <h2 class="knox-section-title">Diagnostics</h2>
+
+  <section class="knox-card">
+    <h3 class="knox-section-title">Gateway</h3>
+    <dl class="facts">
+      <div>
+        <dt>Account</dt>
+        <dd>{{ session.status()?.username ?? '—' }}</dd>
+      </div>
+      <div>
+        <dt>Token expires</dt>
+        <dd>{{ session.status()?.expiresAt ?? '—' }}</dd>
+      </div>
+      <div>
+        <dt>Devices</dt>
+        <dd>{{ devices.devices().length }}</dd>
+      </div>
+      <div>
+        <dt>Selected</dt>
+        <dd>{{ devices.selected()?.alias ?? '—' }}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="knox-card">
+    <h3 class="knox-section-title">Preview surface</h3>
+    <p class="knox-muted">
+      Force the layout used by another form factor. This is how the TV and handset experiences are reviewed from a
+      desktop browser.
+    </p>
+    <mat-button-toggle-group [value]="platform.surface()" aria-label="Preview surface">
+      @for (surface of surfaces; track surface) {
+        <mat-button-toggle [value]="surface" (click)="setSurface(surface)">{{ surface }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+  </section>
+
+  <section class="knox-card">
+    <h3 class="knox-section-title">Raw ShineMonitor call</h3>
+    <p class="knox-muted">Signed by the gateway. Use read-only actions unless you intend to change the inverter.</p>
+
+    <div class="knox-row">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" class="action-field">
+        <mat-label>Action</mat-label>
+        <input matInput [ngModel]="action()" (ngModelChange)="action.set($event)" list="diagnostics-actions" />
+      </mat-form-field>
+
+      <datalist id="diagnostics-actions">
+        @for (preset of presets; track preset) {
+          <option [value]="preset"></option>
+        }
+      </datalist>
+
+      <button mat-flat-button type="button" [disabled]="running()" (click)="run()">
+        <mat-icon>play_arrow</mat-icon>
+        Run
+      </button>
+    </div>
+
+    @if (error(); as message) {
+      <app-status-banner title="Call failed" [detail]="message" tone="error" icon="error" />
+    }
+
+    @if (response(); as json) {
+      <pre class="response">{{ json }}</pre>
+    }
+  </section>
+</div>

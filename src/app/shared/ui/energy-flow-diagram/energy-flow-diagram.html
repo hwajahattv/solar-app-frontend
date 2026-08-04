@@ -1,0 +1,63 @@
+<div class="diagram" role="img" [attr.aria-label]="flow().summary">
+  <!--
+    Two wire sets: the stacked one is used in narrow containers, the wide one
+    once there is room for a left-to-right layout. Endpoints match the node
+    anchors defined in the stylesheet, and nodes paint over the wire tails.
+  -->
+  <svg class="diagram__wires diagram__wires--stack" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    @for (wire of wires(); track wire.id) {
+      <path
+        class="diagram__wire"
+        [class.diagram__wire--active]="wire.active"
+        [class.diagram__wire--reversed]="wire.reversed"
+        [attr.data-accent]="wire.accent"
+        [attr.d]="wire.stackPath"
+      />
+    }
+  </svg>
+
+  <svg class="diagram__wires diagram__wires--wide" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+    @for (wire of wires(); track wire.id) {
+      <path
+        class="diagram__wire"
+        [class.diagram__wire--active]="wire.active"
+        [class.diagram__wire--reversed]="wire.reversed"
+        [attr.data-accent]="wire.accent"
+        [attr.d]="wire.widePath"
+      />
+    }
+  </svg>
+
+  @for (node of nodes(); track node.key) {
+    <article
+      class="diagram__node"
+      [class.diagram__node--active]="node.active"
+      [class.diagram__node--hero]="node.hero"
+      [attr.data-position]="node.position"
+      [attr.data-accent]="node.accent"
+    >
+      <mat-icon class="diagram__icon">{{ node.icon }}</mat-icon>
+      <span class="diagram__label">{{ node.label }}</span>
+      <span class="diagram__primary" [class.diagram__primary--hero]="node.hero">{{ node.primary }}</span>
+      <span class="diagram__secondary">{{ node.secondary }}</span>
+
+      @if (node.key === 'battery') {
+        <div class="diagram__battery">
+          <div
+            class="diagram__battery-fill"
+            [style.width.%]="batteryPercent()"
+            [style.background]="
+              'linear-gradient(90deg, hsl(' + batteryHue() + ' 80% 38%), hsl(' + batteryHue() + ' 85% 52%))'
+            "
+          ></div>
+          <span class="diagram__battery-text">
+            {{ flow().battery.soc | metricValue }}%
+            @if (batteryCharging()) {
+              <mat-icon class="diagram__battery-icon">bolt</mat-icon>
+            }
+          </span>
+        </div>
+      }
+    </article>
+  }
+</div>

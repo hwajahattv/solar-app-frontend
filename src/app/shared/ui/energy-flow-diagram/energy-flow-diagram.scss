@@ -1,0 +1,228 @@
+// The diagram sizes itself from its own box, not the viewport, so it lays out
+// the same in a narrow dashboard column and in a full-width TV panel.
+:host {
+  display: block;
+  container: flowdiagram / inline-size;
+}
+
+.diagram {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: 34rem;
+  background: var(--knox-surface-sunken);
+  border: 1px solid var(--knox-border);
+  border-radius: var(--knox-radius-md);
+  overflow: hidden;
+}
+
+/* --- Wires ---------------------------------------------------------------- */
+
+.diagram__wires {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.diagram__wires--wide {
+  display: none;
+}
+
+.diagram__wire {
+  fill: none;
+  stroke: color-mix(in srgb, var(--mat-sys-outline) 55%, transparent);
+  stroke-width: 4;
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;
+  transition: stroke var(--knox-transition);
+}
+
+.diagram__wire--active {
+  stroke-width: 5;
+  stroke-dasharray: 6 8;
+  animation: wire-flow 0.8s linear infinite;
+
+  &[data-accent='grid'] { stroke: var(--knox-grid); }
+  &[data-accent='solar'] { stroke: var(--knox-solar); }
+  &[data-accent='battery'] { stroke: var(--knox-battery); }
+  &[data-accent='battery-charge'] { stroke: var(--knox-battery-charging); }
+  &[data-accent='load'] { stroke: var(--knox-load); }
+}
+
+.diagram__wire--active.diagram__wire--reversed {
+  animation-name: wire-flow-reverse;
+}
+
+@keyframes wire-flow {
+  to { stroke-dashoffset: -14; }
+}
+
+@keyframes wire-flow-reverse {
+  to { stroke-dashoffset: 14; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram__wire--active { animation: none; }
+}
+
+/* --- Nodes ---------------------------------------------------------------- */
+
+// Every node is centred on its anchor, so the wire endpoints stay aligned no
+// matter how wide the box grows.
+.diagram__node {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: var(--knox-space-sm);
+  text-align: center;
+  background: var(--knox-surface-raised);
+  border: 1px solid var(--knox-border);
+  border-radius: var(--knox-radius-md);
+  opacity: 0.55;
+  transition:
+    border-color var(--knox-transition),
+    box-shadow var(--knox-transition),
+    opacity var(--knox-transition);
+
+  --node-accent: var(--knox-idle);
+
+  &[data-accent='grid'] { --node-accent: var(--knox-grid); }
+  &[data-accent='solar'] { --node-accent: var(--knox-solar); }
+  &[data-accent='battery'] { --node-accent: var(--knox-battery); }
+  &[data-accent='battery-charge'] { --node-accent: var(--knox-battery-charging); }
+  &[data-accent='load'] { --node-accent: var(--knox-load); }
+  &[data-accent='inverter'] {
+    --node-accent: var(--mat-sys-primary);
+    opacity: 1;
+  }
+
+  // Portrait anchors: sources across the top, inverter centre, house bottom.
+  width: min(30%, 8.5rem);
+
+  &[data-position='grid'] { left: 17%; top: 15%; }
+  &[data-position='solar'] { left: 50%; top: 15%; }
+  &[data-position='battery'] { left: 83%; top: 15%; }
+  &[data-position='inverter'] { left: 50%; top: 52%; width: min(46%, 11rem); }
+  &[data-position='load'] { left: 50%; top: 86%; width: min(52%, 13rem); }
+}
+
+.diagram__node--active {
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--node-accent) 65%, transparent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--node-accent) 35%, transparent),
+    0 0 1.25rem color-mix(in srgb, var(--node-accent) 22%, transparent);
+}
+
+.diagram__node--hero {
+  background: color-mix(in srgb, var(--knox-load) 8%, var(--knox-surface-raised));
+}
+
+.diagram__icon {
+  color: var(--node-accent);
+  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.diagram__label {
+  font: var(--mat-sys-label-small);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.diagram__primary {
+  font: var(--mat-sys-title-small);
+  font-variant-numeric: tabular-nums;
+  color: var(--mat-sys-on-surface);
+  overflow-wrap: anywhere;
+}
+
+.diagram__primary--hero {
+  font: var(--mat-sys-headline-small);
+  color: var(--knox-load);
+}
+
+.diagram__secondary {
+  font: var(--mat-sys-body-small);
+  color: var(--mat-sys-on-surface-variant);
+  overflow-wrap: anywhere;
+}
+
+/* --- Battery bar inside the battery node ---------------------------------- */
+
+.diagram__battery {
+  position: relative;
+  width: 100%;
+  height: 1.15rem;
+  margin-top: 0.2rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--knox-surface-sunken);
+  border: 1px solid var(--knox-border);
+}
+
+.diagram__battery-fill {
+  height: 100%;
+  transition: width var(--knox-transition);
+}
+
+.diagram__battery-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  font: var(--mat-sys-label-small);
+  color: #fff;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 55%);
+}
+
+.diagram__battery-icon {
+  font-size: 0.8rem;
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+/* --- Wide layout ---------------------------------------------------------- */
+
+@container flowdiagram (min-width: 620px) {
+  .diagram {
+    aspect-ratio: 16 / 9;
+    min-height: 28rem;
+  }
+
+  .diagram__wires--stack { display: none; }
+  .diagram__wires--wide { display: block; }
+
+  .diagram__node {
+    gap: 0.15rem;
+    padding: var(--knox-space-sm) var(--knox-space-md);
+    width: min(26%, 11rem);
+
+    &[data-position='grid'] { left: 16%; top: 18%; }
+    &[data-position='solar'] { left: 16%; top: 50%; }
+    &[data-position='battery'] { left: 16%; top: 82%; }
+    &[data-position='inverter'] { left: 50%; top: 50%; width: min(20%, 8.5rem); }
+    &[data-position='load'] { left: 84%; top: 50%; width: min(28%, 12rem); }
+  }
+
+  .diagram__icon {
+    font-size: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .diagram__label { font: var(--mat-sys-label-medium); }
+  .diagram__primary { font: var(--mat-sys-title-medium); }
+  .diagram__primary--hero { font: var(--mat-sys-headline-medium); }
+  .diagram__battery { height: 1.35rem; }
+}

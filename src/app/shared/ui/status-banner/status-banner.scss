@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: var(--knox-space-md);
+  padding: var(--knox-space-md);
+  border-radius: var(--knox-radius-md);
+  border: 1px solid var(--knox-border);
+  background: var(--knox-surface-raised);
+
+  --banner-accent: var(--knox-grid);
+
+  &[data-tone='warn'] { --banner-accent: var(--knox-warn); }
+  &[data-tone='error'] { --banner-accent: var(--knox-danger); }
+
+  border-left: 4px solid var(--banner-accent);
+
+  mat-icon {
+    color: var(--banner-accent);
+  }
+}
+
+.banner__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.banner__title {
+  font: var(--mat-sys-title-small);
+}
+
+.banner__detail {
+  font: var(--mat-sys-body-small);
+  color: var(--mat-sys-on-surface-variant);
+}
