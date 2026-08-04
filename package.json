@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "node scripts/write-env.mjs && ng build",
+    "build": "node scripts/write-env.mjs && node scripts/ng-build.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:pin": "vitest run --config vitest.pin.config.ts",

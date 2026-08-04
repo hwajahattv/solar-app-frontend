@@ -5,7 +5,9 @@ the same UI concepts carry over to a mobile and TV app later.
 
 ## Running locally
 
-Requires **Node.js 22+**.
+Requires **Node.js 22.22.3+** locally (or 24.15+ / 26+). Vercel only pins the
+major line (`22.x`); if its patch lags Angular’s minimum, `npm run build` uses
+`scripts/ng-build.mjs` to bypass that gate.
 
 ```bash
 npm install
