@@ -10,7 +10,7 @@ import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
 import { _ as PortalModule, a as OverlayConfig, d as createGlobalPositionStrategy, f as createOverlayRef, g as ComponentPortal, h as CdkPortalOutlet, m as BasePortalOutlet, s as OverlayModule, v as TemplatePortal } from "./overlay-B7btoqQv.js";
 import "./platform-BpbWXFth.js";
 import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
-import { i as MatButtonModule, r as MatButton } from "./button-DRAQRXvN.js";
+import { i as MatButtonModule, r as MatButton } from "./button-Cbbo_iRL.js";
 //#region node_modules/@angular/material/fesm2022/snack-bar.mjs
 function SimpleSnackBar_Conditional_2_Template(rf, ctx) {
 	if (rf & 1) {

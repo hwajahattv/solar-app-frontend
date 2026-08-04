@@ -7,10 +7,10 @@ import { l as FocusMonitor } from "./a11y-mRNReBoK.js";
 import "./private-CG1E6DFw.js";
 import { t as hasModifierKey } from "./keycodes-BvDTxKgo.js";
 import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
+import { t as SelectionModel } from "./_selection-model-chunk-DOms3Uqj.js";
+import { c as _StructuralStylesLoader, r as MatRipple, t as MatRippleModule } from "./_ripple-module-chunk-DNxe7YUZ.js";
 import "./platform-BpbWXFth.js";
 import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
-import { i as MatRipple, n as _StructuralStylesLoader, t as MatRippleModule } from "./_ripple-module-chunk-C4uW7S8e.js";
-import { t as SelectionModel } from "./_selection-model-chunk-DOms3Uqj.js";
 import { t as MatPseudoCheckbox } from "./_pseudo-checkbox-chunk-D1XG8cXS.js";
 //#region node_modules/@angular/material/fesm2022/button-toggle.mjs
 var _c0 = ["button"];

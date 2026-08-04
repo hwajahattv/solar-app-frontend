@@ -10,8 +10,8 @@ import { l as FocusMonitor, t as AriaDescriber } from "./a11y-mRNReBoK.js";
 import { t as hasModifierKey } from "./keycodes-BvDTxKgo.js";
 import { f as createOverlayRef, g as ComponentPortal, p as createRepositionScrollStrategy, u as createFlexibleConnectedPositionStrategy } from "./overlay-B7btoqQv.js";
 import "./platform-BpbWXFth.js";
-import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
 import { t as coerceBooleanProperty } from "./coercion-COuovbg1.js";
+import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
 //#region node_modules/@angular/material/fesm2022/_tooltip-chunk.mjs
 var _c0 = ["tooltip"];
 var SCROLL_THROTTLE_MS = 20;

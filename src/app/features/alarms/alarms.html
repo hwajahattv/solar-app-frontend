@@ -57,4 +57,98 @@
       </article>
     }
   </div>
+
+  <section class="analysis" aria-labelledby="alarms-analysis-heading">
+    <header class="knox-row analysis__header">
+      <h3 id="alarms-analysis-heading" class="knox-section-title">Analysis</h3>
+      @if (analysisAlarms().length > 0) {
+        <span class="knox-muted">{{ analysisAlarms().length }} total · {{ analysisGroups().length }} titles</span>
+      }
+      <span class="knox-spacer"></span>
+      @if (analysisGroups().length > 0) {
+        <button
+          mat-stroked-button
+          type="button"
+          (click)="exportAllReports()"
+          matTooltip="Download every analysis table as one Excel workbook"
+        >
+          <mat-icon>download</mat-icon>
+          Export all Excel
+        </button>
+      }
+    </header>
+
+    @if (analysisError(); as message) {
+      <app-status-banner title="Alarm analysis unavailable" [detail]="message" tone="error" icon="error" />
+    } @else if (analysisLoading() && analysisAlarms().length === 0) {
+      <app-status-banner title="Loading full alarm history…" [busy]="true" />
+    } @else if (!analysisLoading() && analysisGroups().length === 0) {
+      <app-status-banner
+        title="No alarm history to analyse"
+        detail="Once the inverter reports faults, they are grouped here by title."
+        icon="analytics"
+      />
+    } @else {
+      @if (analysisLoading()) {
+        <mat-progress-bar mode="indeterminate" class="analysis__progress" />
+      }
+
+      <div class="analysis__groups">
+        @for (group of analysisGroups(); track group.title) {
+          <section class="knox-card knox-card--flush analysis__group">
+            <header class="analysis__group-head">
+              <div class="analysis__group-titles">
+                <h4 class="analysis__group-title">{{ group.reportName }}</h4>
+                <p class="analysis__group-meta">
+                  <span class="knox-muted">{{ group.title }}</span>
+                  <span class="knox-muted">· {{ group.dateRange.label }}</span>
+                  <span class="knox-muted">· {{ group.alarms.length }} events</span>
+                </p>
+              </div>
+              @if (group.activeCount > 0) {
+                <span class="pill pill--active">{{ group.activeCount }} active</span>
+              }
+              <span class="knox-spacer"></span>
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="exportGroup(group)"
+                [matTooltip]="'Export ' + group.reportName + ' (' + group.dateRange.label + ')'"
+              >
+                <mat-icon>table_view</mat-icon>
+                Excel
+              </button>
+            </header>
+
+            <div class="knox-scroll-x">
+              <table class="analysis-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Started</th>
+                    <th scope="col">Cleared</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (alarm of group.alarms; track $index + (alarm.startedAt ?? '') + (alarm.clearedAt ?? '')) {
+                    <tr [class.analysis-table__row--active]="alarm.active">
+                      <td>{{ alarm.startedAt ? (alarm.startedAt | date: 'medium') : '—' }}</td>
+                      <td>{{ alarm.clearedAt ? (alarm.clearedAt | date: 'medium') : '—' }}</td>
+                      <td>{{ elapsed(alarm) | duration }}</td>
+                      <td>
+                        <span class="pill" [class.pill--active]="alarm.active">
+                          {{ alarm.active ? 'Active' : 'Resolved' }}
+                        </span>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+        }
+      </div>
+    }
+  </section>
 </div>

@@ -6,9 +6,9 @@ import { NG_VALUE_ACCESSOR } from "./@angular_forms.js";
 import { l as FocusMonitor } from "./a11y-mRNReBoK.js";
 import "./private-CG1E6DFw.js";
 import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
+import { c as _StructuralStylesLoader, r as MatRipple, t as MatRippleModule } from "./_ripple-module-chunk-DNxe7YUZ.js";
 import "./platform-BpbWXFth.js";
 import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
-import { i as MatRipple, n as _StructuralStylesLoader, t as MatRippleModule } from "./_ripple-module-chunk-C4uW7S8e.js";
 import { t as _MatInternalFormField } from "./_internal-form-field-chunk-mDAQdERt.js";
 //#region node_modules/@angular/cdk/fesm2022/_unique-selection-dispatcher-chunk.mjs
 var UniqueSelectionDispatcher = class UniqueSelectionDispatcher {

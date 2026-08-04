@@ -4,10 +4,10 @@ import { t as BidiModule } from "./bidi-BWzGJE9s.js";
 import { t as _CdkPrivateStyleLoader } from "./_style-loader-chunk-BjwbA0ma.js";
 import { l as FocusMonitor } from "./a11y-mRNReBoK.js";
 import "./private-CG1E6DFw.js";
+import { c as _StructuralStylesLoader, t as MatRippleModule } from "./_ripple-module-chunk-DNxe7YUZ.js";
 import "./platform-BpbWXFth.js";
 import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
-import { n as _StructuralStylesLoader, t as MatRippleModule } from "./_ripple-module-chunk-C4uW7S8e.js";
-import { t as MatRippleLoader } from "./_ripple-loader-chunk-CkwWjgtm.js";
+import { t as MatRippleLoader } from "./_ripple-loader-chunk-BTqsI0t3.js";
 //#region node_modules/@angular/material/fesm2022/_icon-button-chunk.mjs
 var _c0$1 = ["*", [[
 	"",

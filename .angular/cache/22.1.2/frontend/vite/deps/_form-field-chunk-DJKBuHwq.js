@@ -7,8 +7,8 @@ import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
 import "./a11y-mRNReBoK.js";
 import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
 import "./platform-BpbWXFth.js";
-import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
 import { t as coerceBooleanProperty } from "./coercion-COuovbg1.js";
+import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
 //#region node_modules/@angular/cdk/fesm2022/observers-private.mjs
 var loopLimitExceededErrorHandler = (e) => {
 	if (e instanceof ErrorEvent && e.message === "ResizeObserver loop limit exceeded") console.error(`${e.message}. This could indicate a performance issue with your app. See https://github.com/WICG/resize-observer/blob/master/explainer.md#error-handling`);

@@ -5,7 +5,7 @@ import { i as CdkScrollableModule } from "./scrolling-CH6VUmiH.js";
 import { n as A11yModule } from "./a11y-mRNReBoK.js";
 import { s as OverlayModule } from "./overlay-B7btoqQv.js";
 import "./platform-BpbWXFth.js";
-import { a as TOOLTIP_PANEL_CLASS, i as SCROLL_THROTTLE_MS, n as MAT_TOOLTIP_SCROLL_STRATEGY, o as TooltipComponent, r as MatTooltip, s as getMatTooltipInvalidPositionError, t as MAT_TOOLTIP_DEFAULT_OPTIONS } from "./_tooltip-chunk-DjJTp2Rm.js";
+import { a as TOOLTIP_PANEL_CLASS, i as SCROLL_THROTTLE_MS, n as MAT_TOOLTIP_SCROLL_STRATEGY, o as TooltipComponent, r as MatTooltip, s as getMatTooltipInvalidPositionError, t as MAT_TOOLTIP_DEFAULT_OPTIONS } from "./_tooltip-chunk-DIHstupU.js";
 //#region node_modules/@angular/material/fesm2022/tooltip.mjs
 var MatTooltipModule = class MatTooltipModule {
 	static ɵfac = function MatTooltipModule_Factory(__ngFactoryType__) {

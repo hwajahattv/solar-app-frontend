@@ -7,7 +7,7 @@ import "./a11y-mRNReBoK.js";
 import { t as _VisuallyHiddenLoader } from "./private-CG1E6DFw.js";
 import { t as hasModifierKey } from "./keycodes-BvDTxKgo.js";
 import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
-import { i as MatRipple, n as _StructuralStylesLoader, t as MatRippleModule } from "./_ripple-module-chunk-C4uW7S8e.js";
+import { c as _StructuralStylesLoader, r as MatRipple, t as MatRippleModule } from "./_ripple-module-chunk-DNxe7YUZ.js";
 import { t as MatPseudoCheckbox } from "./_pseudo-checkbox-chunk-D1XG8cXS.js";
 //#region node_modules/@angular/material/fesm2022/_option-chunk.mjs
 var _c0 = ["*", [["mat-option"], ["ng-container"]]];
