@@ -1,0 +1,54 @@
+.filter {
+  min-width: 12rem;
+}
+
+.summary-grid {
+  margin-top: var(--knox-space-sm);
+}
+
+.summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  strong {
+    font: var(--mat-sys-title-small);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+
+  th,
+  td {
+    padding: var(--knox-space-sm) var(--knox-space-md);
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--knox-border);
+  }
+
+  th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--knox-surface-sunken);
+    font: var(--mat-sys-label-large);
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  tbody tr {
+    cursor: pointer;
+    transition: background var(--knox-transition);
+
+    &:hover {
+      background: color-mix(in srgb, var(--mat-sys-primary) 8%, transparent);
+    }
+  }
+}
+
+.log-table__row--selected {
+  background: color-mix(in srgb, var(--mat-sys-primary) 16%, transparent);
+}

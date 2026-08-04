@@ -1,0 +1,62 @@
+<div class="flow" role="img" [attr.aria-label]="flow().summary">
+  <div class="flow__column flow__column--sources">
+    @for (node of sources(); track node.key) {
+      <div class="node" [class.node--active]="node.active" [attr.data-accent]="node.key">
+        <mat-icon class="node__icon">{{ node.icon }}</mat-icon>
+        <div class="node__text">
+          <span class="node__label">{{ node.label }}</span>
+          <span class="node__primary">{{ node.primary }}</span>
+          <span class="node__secondary">{{ node.secondary }}</span>
+        </div>
+      </div>
+
+      <div
+        class="beam"
+        [class.beam--active]="node.active"
+        [class.beam--reversed]="node.reversed"
+        [attr.data-accent]="node.key"
+        aria-hidden="true"
+      ></div>
+    }
+  </div>
+
+  <div class="flow__column flow__column--inverter">
+    <div class="node node--inverter node--active">
+      <mat-icon class="node__icon">settings_input_component</mat-icon>
+      <div class="node__text">
+        <span class="node__label">Inverter</span>
+        <span class="node__primary">{{ flow().mode ?? '—' }}</span>
+        <span class="node__secondary">{{ flow().summary }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow__column flow__column--load">
+    <div class="beam beam--load" [class.beam--active]="flow().load.active" aria-hidden="true"></div>
+
+    <div class="node node--house" [class.node--active]="flow().load.active" data-accent="load">
+      <mat-icon class="node__icon">house</mat-icon>
+      <div class="node__text">
+        <span class="node__label">House load</span>
+        <span class="node__primary node__primary--hero">{{ loadKilowatts() | metricValue: 2 }} kW</span>
+        <span class="node__secondary">{{ flow().load.current | metricValue: 1 }} A</span>
+      </div>
+    </div>
+
+    <div class="battery-bar">
+      <div
+        class="battery-bar__fill"
+        [style.width.%]="batteryPercent()"
+        [style.background]="
+          'linear-gradient(90deg, hsl(' + batteryHue() + ' 80% 38%), hsl(' + batteryHue() + ' 85% 52%))'
+        "
+      ></div>
+      <span class="battery-bar__text">
+        Battery {{ flow().battery.soc | metricValue }}%
+        @if (flow().battery.charging) {
+          <mat-icon class="battery-bar__icon">bolt</mat-icon>
+        }
+      </span>
+    </div>
+  </div>
+</div>

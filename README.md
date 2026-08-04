@@ -69,37 +69,6 @@ colours (grid, solar, battery, load) are semantic tokens in
 `src/theme/_tokens.scss` and identify a source consistently across the diagram,
 the tiles and the status pills.
 
-## Deploy on Vercel
-
-This SPA is an alternate deploy target to the Docker/nginx path. Set the Vercel
-project **Root Directory** to `frontend` so it picks up [`vercel.json`](vercel.json).
-
-What `vercel.json` does:
-
-1. Builds with `npm run build` and serves `dist/frontend/browser`.
-2. Proxies same-origin `/api/*` to the Nest gateway at
-   `https://solar-app-ochre.vercel.app` (update the rewrite destination if the
-   backend hostname changes).
-3. Falls back to `index.html` for Angular client routes.
-4. Applies cache and basic security headers similar to `nginx.conf`.
-
-Backend env (on the `solar-app` Vercel project) that must be set:
-
-| Variable | Purpose |
-| --- | --- |
-| `ACCESS_PIN` | PIN required to unlock Controls / Diagnostics |
-| `ACCESS_TOKEN_SECRET` | HMAC secret for signed access tokens |
-| `CORS_ORIGINS` | Include the frontend origin (e.g. `https://….vercel.app`) for Swagger / direct API calls |
-
-Camera streaming still requires ffmpeg and LAN reachability to the camera, so it
-will not work on Vercel serverless — the UI already degrades when the camera is
-unconfigured.
-
-### Non-goals for this deploy path
-
-Full user accounts, TypeScript `strict` migration, broad automated test/CI
-coverage, and on-Vercel camera capture are out of scope.
-
 ## Testing
 
 ```bash
