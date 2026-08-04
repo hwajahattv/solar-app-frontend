@@ -34,6 +34,17 @@ export interface LoadState {
   loadPercent: number | null;
 }
 
+export interface DailyEnergy {
+  /** PV generation today (kWh), integrated from PV power samples. */
+  generatedTodayKwh: number | null;
+  /** Load consumption today (kWh). */
+  consumedTodayKwh: number | null;
+  /** Energy charged into the battery today (kWh). */
+  batteryChargedTodayKwh: number | null;
+  /** Energy supplied by the battery today (kWh). */
+  batteryDischargedTodayKwh: number | null;
+}
+
 export interface EnergyFlow {
   readingAt: string | null;
   fetchedAt: string;
@@ -46,4 +57,5 @@ export interface EnergyFlow {
   solar: SolarState;
   battery: BatteryState;
   load: LoadState;
+  energy: DailyEnergy;
 }

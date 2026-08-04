@@ -55,6 +55,13 @@ export class Dashboard {
     const flow = this.flow();
     if (!flow) return [];
 
+    const energy = flow.energy ?? {
+      generatedTodayKwh: null,
+      consumedTodayKwh: null,
+      batteryChargedTodayKwh: null,
+      batteryDischargedTodayKwh: null,
+    };
+
     return [
       {
         key: 'grid',
@@ -95,6 +102,46 @@ export class Dashboard {
         icon: 'house',
         accent: 'load',
         active: flow.load.active,
+      },
+      {
+        key: 'gen-today',
+        label: 'Generated today',
+        value: format(energy.generatedTodayKwh, 2),
+        unit: 'kWh',
+        hint: 'PV generation (integrated)',
+        icon: 'solar_power',
+        accent: 'solar',
+        active: (energy.generatedTodayKwh ?? 0) > 0,
+      },
+      {
+        key: 'consumed-today',
+        label: 'Consumed today',
+        value: format(energy.consumedTodayKwh, 2),
+        unit: 'kWh',
+        hint: 'House load (integrated)',
+        icon: 'power',
+        accent: 'load',
+        active: (energy.consumedTodayKwh ?? 0) > 0,
+      },
+      {
+        key: 'battery-stored-today',
+        label: 'Battery stored today',
+        value: format(energy.batteryChargedTodayKwh, 2),
+        unit: 'kWh',
+        hint: 'Energy charged into battery',
+        icon: 'battery_charging_full',
+        accent: 'battery',
+        active: (energy.batteryChargedTodayKwh ?? 0) > 0,
+      },
+      {
+        key: 'battery-supplied-today',
+        label: 'Battery supplied today',
+        value: format(energy.batteryDischargedTodayKwh, 2),
+        unit: 'kWh',
+        hint: 'Energy supplied by battery',
+        icon: 'battery_saver',
+        accent: 'battery',
+        active: (energy.batteryDischargedTodayKwh ?? 0) > 0,
       },
     ];
   });

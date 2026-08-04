@@ -1,10 +1,10 @@
 import { F as ErrorHandler, T as DOCUMENT, U as InjectionToken, dt as SecurityContext, oa as ɵɵdefineInjectable, sa as ɵɵdefineInjector, ua as ɵɵinject, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { Ho as ɵɵprojection, Jt as Component, Nn as NgModule, O as booleanAttribute, Oi as setClassMetadata, Rn as Optional, Sn as Input, Uo as ɵɵprojectionDef, Va as ɵɵdefineNgModule, aa as ɵɵclassProp, bn as Inject, f as HostAttributeToken, fn as ElementRef, ia as ɵɵclassMap, pr as ViewEncapsulation, ra as ɵɵattribute, xn as Injectable, za as ɵɵdefineComponent } from "./core-tK2ALGvq.js";
 import { An as throwError, Ct as take, Lt as catchError, O as share, cn as forkJoin, jn as of, m as tap, ot as finalize, ur as Subscription, vn as map } from "./esm5-ChK3bs0s.js";
-import { t as BidiModule } from "./bidi-BWzGJE9s.js";
-import { l as HttpClient } from "./http-BodLpVxo.js";
 import { r as trustedHTMLFromString } from "./private-CG1E6DFw.js";
 import { r as DomSanitizer } from "./platform-browser-BUD4Ook4.js";
+import { l as HttpClient } from "./http-BodLpVxo.js";
+import { t as BidiModule } from "./bidi-BWzGJE9s.js";
 //#region node_modules/@angular/material/fesm2022/_icon-registry-chunk.mjs
 function getMatIconNameNotFoundError(iconName) {
 	return Error(`Unable to find icon with the name "${iconName}"`);

@@ -1,17 +1,17 @@
 import { T as DOCUMENT, U as InjectionToken, W as Injector, et as NgZone, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { Ba as ɵɵdefineDirective, Gs as ɵɵviewQuery, Jt as Component, No as ɵɵlistener, Oi as setClassMetadata, Os as ɵɵtext, Po as ɵɵloadQuery, S as ViewChild, Sn as Input, Wn as Renderer2, Xa as ɵɵdomElementStart, Ya as ɵɵdomElementEnd, Yi as ɵɵadvance, Za as ɵɵdomListener, aa as ɵɵclassProp, fn as ElementRef, fr as ViewContainerRef, ia as ɵɵclassMap, ks as ɵɵtextInterpolate, ns as ɵɵqueryRefresh, pr as ViewEncapsulation, r as ChangeDetectorRef, un as Directive, vr as afterNextRender, za as ɵɵdefineComponent } from "./core-tK2ALGvq.js";
 import { Qn as Subject, g as takeUntil } from "./esm5-ChK3bs0s.js";
-import { i as Directionality } from "./bidi-BWzGJE9s.js";
+import { l as FocusMonitor, t as AriaDescriber } from "./a11y-BlmDWDL_.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
-import { i as MediaMatcher } from "./layout-CDhD8Ksn.js";
 import { n as coerceNumberProperty } from "./_element-chunk-BARXOZho.js";
-import { p as ScrollDispatcher } from "./scrolling-CH6VUmiH.js";
-import { l as FocusMonitor, t as AriaDescriber } from "./a11y-mRNReBoK.js";
+import { i as MediaMatcher } from "./layout-CDhD8Ksn.js";
 import { t as hasModifierKey } from "./keycodes-BvDTxKgo.js";
-import { f as createOverlayRef, g as ComponentPortal, p as createRepositionScrollStrategy, u as createFlexibleConnectedPositionStrategy } from "./overlay-B7btoqQv.js";
+import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
+import { p as ScrollDispatcher } from "./scrolling-33GsSsyA.js";
+import { f as createOverlayRef, g as ComponentPortal, p as createRepositionScrollStrategy, u as createFlexibleConnectedPositionStrategy } from "./overlay-tQpiFxGk.js";
 import "./platform-BpbWXFth.js";
 import { t as coerceBooleanProperty } from "./coercion-COuovbg1.js";
-import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
+import { i as Directionality } from "./bidi-BWzGJE9s.js";
 //#region node_modules/@angular/material/fesm2022/_tooltip-chunk.mjs
 var _c0 = ["tooltip"];
 var SCROLL_THROTTLE_MS = 20;

@@ -1,15 +1,15 @@
 import { I as EventEmitter, P as EnvironmentInjector, T as DOCUMENT, U as InjectionToken, W as Injector, et as NgZone, sa as ɵɵdefineInjector, v as ANIMATION_MODULE_TYPE, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { Ba as ɵɵdefineDirective, Gn as RendererFactory2, Jt as Component, Ki as ɵɵInheritDefinitionFeature, Ln as NgModuleRef$1, M as createComponent, Nn as NgModule, O as booleanAttribute, Oi as setClassMetadata, Sn as Input, Ua as ɵɵdefineService, Va as ɵɵdefineNgModule, Vt as ApplicationRef, Wn as Renderer2, Zn as Service, fn as ElementRef, fo as ɵɵgetInheritedFactory, fr as ViewContainerRef, ir as TemplateRef, pr as ViewEncapsulation, qi as ɵɵNgOnChangesFeature, un as Directive, vr as afterNextRender, za as ɵɵdefineComponent, zn as Output } from "./core-tK2ALGvq.js";
 import { Qn as Subject, Xt as filter, h as takeWhile, ur as Subscription } from "./esm5-ChK3bs0s.js";
-import { i as Directionality, t as BidiModule } from "./bidi-BWzGJE9s.js";
+import { d as _getEventTarget } from "./a11y-BlmDWDL_.js";
 import { jt as Location } from "./common-Cxsxcxqt.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
-import { a as coerceArray } from "./layout-CDhD8Ksn.js";
-import { _ as ViewportRuler, m as ScrollingModule, p as ScrollDispatcher, y as supportsScrollBehavior } from "./scrolling-CH6VUmiH.js";
 import { t as _CdkPrivateStyleLoader } from "./_style-loader-chunk-BjwbA0ma.js";
-import { d as _getEventTarget } from "./a11y-mRNReBoK.js";
+import { a as coerceArray } from "./layout-CDhD8Ksn.js";
 import { t as hasModifierKey } from "./keycodes-BvDTxKgo.js";
 import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
+import { _ as ViewportRuler, m as ScrollingModule, p as ScrollDispatcher, y as supportsScrollBehavior } from "./scrolling-33GsSsyA.js";
+import { i as Directionality, t as BidiModule } from "./bidi-BWzGJE9s.js";
 //#region node_modules/@angular/cdk/fesm2022/_test-environment-chunk.mjs
 function _isTestEnvironment() {
 	return typeof __karma__ !== "undefined" && !!__karma__ || typeof jasmine !== "undefined" && !!jasmine || typeof jest !== "undefined" && !!jest || typeof Mocha !== "undefined" && !!Mocha;

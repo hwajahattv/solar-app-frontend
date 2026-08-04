@@ -33,7 +33,9 @@
               "src/styles.scss"
             ],
             "allowedCommonJsDependencies": [
-              "xlsx"
+              "xlsx",
+              "echarts",
+              "zrender"
             ]
           },
           "configurations": {

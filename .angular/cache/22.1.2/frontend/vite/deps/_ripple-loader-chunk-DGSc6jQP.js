@@ -1,10 +1,10 @@
 import { T as DOCUMENT, W as Injector, et as NgZone, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { Gn as RendererFactory2, Oi as setClassMetadata, Ua as ɵɵdefineService, Zn as Service } from "./core-tK2ALGvq.js";
+import { d as _getEventTarget } from "./a11y-BlmDWDL_.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
-import { d as _getEventTarget } from "./a11y-mRNReBoK.js";
-import { a as RippleRenderer, n as MAT_RIPPLE_GLOBAL_OPTIONS, s as defaultRippleAnimationConfig } from "./_ripple-module-chunk-DNxe7YUZ.js";
-import "./platform-BpbWXFth.js";
 import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
+import { i as RippleRenderer, o as defaultRippleAnimationConfig, t as MAT_RIPPLE_GLOBAL_OPTIONS } from "./_ripple-chunk-CPd7zeeA.js";
+import "./platform-BpbWXFth.js";
 //#region node_modules/@angular/material/fesm2022/_ripple-loader-chunk.mjs
 var eventListenerOptions = { capture: true };
 var rippleInteractionEvents = [

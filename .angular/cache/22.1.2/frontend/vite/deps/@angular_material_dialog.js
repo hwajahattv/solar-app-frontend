@@ -1,16 +1,16 @@
 import { Bi as signal, I as EventEmitter, T as DOCUMENT, U as InjectionToken, W as Injector, et as NgZone, sa as ɵɵdefineInjector, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { Ba as ɵɵdefineDirective, Es as ɵɵtemplate, Gi as ɵɵHostDirectivesFeature, Gs as ɵɵviewQuery, Gt as ChangeDetectionStrategy, Jt as Component, Ki as ɵɵInheritDefinitionFeature, Nn as NgModule, No as ɵɵlistener, Oi as setClassMetadata, Po as ɵɵloadQuery, Qa as ɵɵdomProperty, S as ViewChild, Sn as Input, Ua as ɵɵdefineService, Va as ɵɵdefineNgModule, Wn as Renderer2, Zn as Service, aa as ɵɵclassProp, ao as ɵɵelementStart, fn as ElementRef, fo as ɵɵgetInheritedFactory, io as ɵɵelementEnd, ir as TemplateRef, ns as ɵɵqueryRefresh, pr as ViewEncapsulation, qi as ɵɵNgOnChangesFeature, r as ChangeDetectorRef, ra as ɵɵattribute, un as Directive, vr as afterNextRender, za as ɵɵdefineComponent } from "./core-tK2ALGvq.js";
 import { Ct as take, Qn as Subject, Xn as ReplaySubject, Xt as filter, tn as merge, un as defer, x as startWith } from "./esm5-ChK3bs0s.js";
-import { i as Directionality, t as BidiModule } from "./bidi-BWzGJE9s.js";
+import { a as InteractivityChecker, f as _getFocusedElementPierceShadowDom, i as FocusTrapFactory, l as FocusMonitor, n as A11yModule } from "./a11y-BlmDWDL_.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
 import { n as coerceNumberProperty } from "./_element-chunk-BARXOZho.js";
-import { r as CdkScrollable } from "./scrolling-CH6VUmiH.js";
-import { a as InteractivityChecker, f as _getFocusedElementPierceShadowDom, i as FocusTrapFactory, l as FocusMonitor, n as A11yModule } from "./a11y-mRNReBoK.js";
 import "./private-CG1E6DFw.js";
 import { t as hasModifierKey } from "./keycodes-BvDTxKgo.js";
 import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
-import { _ as PortalModule, a as OverlayConfig, c as OverlayRef, d as createGlobalPositionStrategy, f as createOverlayRef, g as ComponentPortal, h as CdkPortalOutlet, l as createBlockScrollStrategy, m as BasePortalOutlet, o as OverlayContainer, s as OverlayModule, v as TemplatePortal } from "./overlay-B7btoqQv.js";
 import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
+import { r as CdkScrollable } from "./scrolling-33GsSsyA.js";
+import { _ as PortalModule, a as OverlayConfig, c as OverlayRef, d as createGlobalPositionStrategy, f as createOverlayRef, g as ComponentPortal, h as CdkPortalOutlet, l as createBlockScrollStrategy, m as BasePortalOutlet, o as OverlayContainer, s as OverlayModule, v as TemplatePortal } from "./overlay-tQpiFxGk.js";
+import { i as Directionality, t as BidiModule } from "./bidi-BWzGJE9s.js";
 //#region node_modules/@angular/cdk/fesm2022/dialog.mjs
 function CdkDialogContainer_ng_template_0_Template(rf, ctx) {}
 var DialogConfig = class {

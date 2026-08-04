@@ -1,14 +1,15 @@
 import { Bi as signal, Gr as isSignal, I as EventEmitter, U as InjectionToken, sa as ɵɵdefineInjector, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { As as ɵɵtextInterpolate1, Fo as ɵɵnextContext, Gs as ɵɵviewQuery, Ho as ɵɵprojection, Ji as ɵɵProvidersFeature, Jt as Component, Nn as NgModule, No as ɵɵlistener, O as booleanAttribute, Oi as setClassMetadata, Os as ɵɵtext, Po as ɵɵloadQuery, Qa as ɵɵdomProperty, S as ViewChild, Sn as Input, Uo as ɵɵprojectionDef, Va as ɵɵdefineNgModule, Wo as ɵɵproperty, Xa as ɵɵdomElementStart, Ya as ɵɵdomElementEnd, Yi as ɵɵadvance, aa as ɵɵclassProp, ao as ɵɵelementStart, eo as ɵɵelement, fn as ElementRef, io as ɵɵelementEnd, la as ɵɵconditionalCreate, ns as ɵɵqueryRefresh, pr as ViewEncapsulation, r as ChangeDetectorRef, ra as ɵɵattribute, sa as ɵɵconditional, za as ɵɵdefineComponent, zn as Output } from "./core-tK2ALGvq.js";
 import { Qn as Subject } from "./esm5-ChK3bs0s.js";
-import { t as BidiModule } from "./bidi-BWzGJE9s.js";
+import "./a11y-BlmDWDL_.js";
 import { t as _CdkPrivateStyleLoader } from "./_style-loader-chunk-BjwbA0ma.js";
-import "./a11y-mRNReBoK.js";
 import { t as _VisuallyHiddenLoader } from "./private-CG1E6DFw.js";
 import { t as hasModifierKey } from "./keycodes-BvDTxKgo.js";
 import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
-import { c as _StructuralStylesLoader, r as MatRipple, t as MatRippleModule } from "./_ripple-module-chunk-DNxe7YUZ.js";
+import { n as MatRipple, s as _StructuralStylesLoader } from "./_ripple-chunk-CPd7zeeA.js";
+import { t as BidiModule } from "./bidi-BWzGJE9s.js";
 import { t as MatPseudoCheckbox } from "./_pseudo-checkbox-chunk-D1XG8cXS.js";
+import { t as MatRippleModule } from "./_ripple-module-chunk-DxWeRRdj.js";
 //#region node_modules/@angular/material/fesm2022/_option-chunk.mjs
 var _c0 = ["*", [["mat-option"], ["ng-container"]]];
 var _c1 = ["*", "mat-option, ng-container"];

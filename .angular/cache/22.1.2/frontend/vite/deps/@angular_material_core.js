@@ -1,18 +1,19 @@
 import { mt as Version, sa as ɵɵdefineInjector, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { Ba as ɵɵdefineDirective, Nn as NgModule, Oi as setClassMetadata, Ua as ɵɵdefineService, Va as ɵɵdefineNgModule, Zn as Service, un as Directive } from "./core-tK2ALGvq.js";
 import { x as startWith } from "./esm5-ChK3bs0s.js";
-import { t as BidiModule } from "./bidi-BWzGJE9s.js";
-import "./a11y-mRNReBoK.js";
+import "./a11y-BlmDWDL_.js";
 import "./private-CG1E6DFw.js";
-import { a as RippleRenderer, c as _StructuralStylesLoader, i as RippleRef, n as MAT_RIPPLE_GLOBAL_OPTIONS, o as RippleState, r as MatRipple, s as defaultRippleAnimationConfig, t as MatRippleModule } from "./_ripple-module-chunk-DNxe7YUZ.js";
-import "./platform-BpbWXFth.js";
+import { t as _MatInternalFormField } from "./_internal-form-field-chunk-mDAQdERt.js";
 import { n as _animationsDisabled, r as _getAnimationsState, t as MATERIAL_ANIMATIONS } from "./_animation-chunk-pUo7iRBP.js";
+import { a as RippleState, i as RippleRenderer, n as MatRipple, o as defaultRippleAnimationConfig, r as RippleRef, s as _StructuralStylesLoader, t as MAT_RIPPLE_GLOBAL_OPTIONS } from "./_ripple-chunk-CPd7zeeA.js";
+import "./platform-BpbWXFth.js";
+import { t as BidiModule } from "./bidi-BWzGJE9s.js";
 import { t as MatPseudoCheckbox } from "./_pseudo-checkbox-chunk-D1XG8cXS.js";
-import { t as MatRippleLoader } from "./_ripple-loader-chunk-BTqsI0t3.js";
+import { t as MatRippleModule } from "./_ripple-module-chunk-DxWeRRdj.js";
+import { t as MatRippleLoader } from "./_ripple-loader-chunk-DGSc6jQP.js";
 import { n as MAT_DATE_FORMATS, r as MAT_DATE_LOCALE, t as DateAdapter } from "./_date-formats-chunk-9glXl11a.js";
 import { n as ErrorStateMatcher, r as ShowOnDirtyErrorStateMatcher, t as _ErrorStateTracker } from "./_error-state-chunk-DHniJtWy.js";
-import { a as MatOptgroup, c as _countGroupLabelsBeforeOption, i as MAT_OPTION_PARENT_COMPONENT, l as _getOptionScrollPosition, n as MatPseudoCheckboxModule, o as MatOption, r as MAT_OPTGROUP, s as MatOptionSelectionChange, t as MatOptionModule } from "./_option-module-chunk-pwcrqPX2.js";
-import { t as _MatInternalFormField } from "./_internal-form-field-chunk-mDAQdERt.js";
+import { a as MatOptgroup, c as _countGroupLabelsBeforeOption, i as MAT_OPTION_PARENT_COMPONENT, l as _getOptionScrollPosition, n as MatPseudoCheckboxModule, o as MatOption, r as MAT_OPTGROUP, s as MatOptionSelectionChange, t as MatOptionModule } from "./_option-module-chunk-B_Rg78ON.js";
 //#region node_modules/@angular/material/fesm2022/_line-chunk.mjs
 var MatLine = class MatLine {
 	static ɵfac = function MatLine_Factory(__ngFactoryType__) {

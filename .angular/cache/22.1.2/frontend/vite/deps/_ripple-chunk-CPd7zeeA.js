@@ -1,13 +1,12 @@
-import { U as InjectionToken, W as Injector, et as NgZone, sa as ɵɵdefineInjector, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
-import { Ba as ɵɵdefineDirective, Jt as Component, Nn as NgModule, Oi as setClassMetadata, Sn as Input, Va as ɵɵdefineNgModule, aa as ɵɵclassProp, fn as ElementRef, pr as ViewEncapsulation, un as Directive, za as ɵɵdefineComponent } from "./core-tK2ALGvq.js";
-import { t as BidiModule } from "./bidi-BWzGJE9s.js";
+import { U as InjectionToken, W as Injector, et as NgZone, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
+import { Ba as ɵɵdefineDirective, Jt as Component, Oi as setClassMetadata, Sn as Input, aa as ɵɵclassProp, fn as ElementRef, pr as ViewEncapsulation, un as Directive, za as ɵɵdefineComponent } from "./core-tK2ALGvq.js";
+import { d as _getEventTarget, m as isFakeTouchstartFromScreenReader, p as isFakeMousedownFromScreenReader, u as normalizePassiveListenerOptions } from "./a11y-BlmDWDL_.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
 import { t as coerceElement } from "./_element-chunk-BARXOZho.js";
 import { t as _CdkPrivateStyleLoader } from "./_style-loader-chunk-BjwbA0ma.js";
-import { d as _getEventTarget, m as isFakeTouchstartFromScreenReader, p as isFakeMousedownFromScreenReader, u as normalizePassiveListenerOptions } from "./a11y-mRNReBoK.js";
 import "./private-CG1E6DFw.js";
-import "./platform-BpbWXFth.js";
 import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
+import "./platform-BpbWXFth.js";
 //#region node_modules/@angular/material/fesm2022/_structural-styles-chunk.mjs
 var _StructuralStylesLoader = class _StructuralStylesLoader {
 	static ɵfac = function _StructuralStylesLoader_Factory(__ngFactoryType__) {
@@ -503,26 +502,4 @@ var MatRipple = class MatRipple {
 	});
 })();
 //#endregion
-//#region node_modules/@angular/material/fesm2022/_ripple-module-chunk.mjs
-var MatRippleModule = class MatRippleModule {
-	static ɵfac = function MatRippleModule_Factory(__ngFactoryType__) {
-		return new (__ngFactoryType__ || MatRippleModule)();
-	};
-	static ɵmod = /* @__PURE__ */ ɵɵdefineNgModule({
-		type: MatRippleModule,
-		imports: [MatRipple],
-		exports: [MatRipple, BidiModule]
-	});
-	static ɵinj = /* @__PURE__ */ ɵɵdefineInjector({ imports: [BidiModule] });
-};
-(() => {
-	(typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(MatRippleModule, [{
-		type: NgModule,
-		args: [{
-			imports: [MatRipple],
-			exports: [MatRipple, BidiModule]
-		}]
-	}], null, null);
-})();
-//#endregion
-export { RippleRenderer as a, _StructuralStylesLoader as c, RippleRef as i, MAT_RIPPLE_GLOBAL_OPTIONS as n, RippleState as o, MatRipple as r, defaultRippleAnimationConfig as s, MatRippleModule as t };
+export { RippleState as a, RippleRenderer as i, MatRipple as n, defaultRippleAnimationConfig as o, RippleRef as r, _StructuralStylesLoader as s, MAT_RIPPLE_GLOBAL_OPTIONS as t };

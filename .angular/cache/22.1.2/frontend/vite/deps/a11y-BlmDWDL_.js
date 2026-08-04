@@ -2,10 +2,10 @@ import { I as EventEmitter, T as DOCUMENT, U as InjectionToken, W as Injector, e
 import { Ba as ɵɵdefineDirective, Gn as RendererFactory2, Nn as NgModule, O as booleanAttribute, Oi as setClassMetadata, Sn as Input, Ua as ɵɵdefineService, Va as ɵɵdefineNgModule, Zn as Service, fn as ElementRef, qi as ɵɵNgOnChangesFeature, un as Directive, vr as afterNextRender, zn as Output } from "./core-tK2ALGvq.js";
 import { Qn as Subject, T as skip, Tt as debounceTime, Xt as filter, Zn as BehaviorSubject, g as takeUntil, gt as distinctUntilChanged, jn as of, rr as Observable, vn as map } from "./esm5-ChK3bs0s.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
-import { r as BreakpointObserver } from "./layout-CDhD8Ksn.js";
 import { n as coerceNumberProperty, t as coerceElement } from "./_element-chunk-BARXOZho.js";
 import { t as _CdkPrivateStyleLoader } from "./_style-loader-chunk-BjwbA0ma.js";
 import { n as _setInnerHtml, t as _VisuallyHiddenLoader } from "./private-CG1E6DFw.js";
+import { r as BreakpointObserver } from "./layout-CDhD8Ksn.js";
 import { r as DomSanitizer } from "./platform-browser-BUD4Ook4.js";
 //#region node_modules/@angular/cdk/fesm2022/_fake-event-detection-chunk.mjs
 function isFakeMousedownFromScreenReader(event) {

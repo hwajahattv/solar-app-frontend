@@ -27,9 +27,15 @@ export const routes: Routes = [
     loadComponent: () => import('./features/alarms/alarms').then((m) => m.Alarms),
   },
   {
+    path: 'charts',
+    title: 'Charts · Knox Solar',
+    loadComponent: () => import('./features/charts/charts').then((m) => m.Charts),
+  },
+  {
     path: 'diagnostics',
     title: 'Diagnostics · Knox Solar',
     loadComponent: () => import('./features/diagnostics/diagnostics').then((m) => m.Diagnostics),
   },
+
   { path: '**', redirectTo: 'dashboard' },
 ];

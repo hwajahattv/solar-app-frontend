@@ -1,0 +1,99 @@
+<div class="knox-page">
+  <header class="knox-row charts__header">
+    <h2 class="knox-section-title">Charts</h2>
+    <span class="knox-spacer"></span>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="charts__date">
+      <mat-label>From</mat-label>
+      <input matInput [matDatepicker]="fromPicker" [ngModel]="fromDate()" (ngModelChange)="onFromChange($event)" />
+      <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+      <mat-datepicker #fromPicker />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="charts__date">
+      <mat-label>To</mat-label>
+      <input matInput [matDatepicker]="toPicker" [ngModel]="toDate()" (ngModelChange)="onToChange($event)" />
+      <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
+      <mat-datepicker #toPicker />
+    </mat-form-field>
+
+    <button mat-stroked-button type="button" (click)="reload()">
+      <mat-icon>refresh</mat-icon>
+      Reload
+    </button>
+
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="exportExcel()"
+      [disabled]="chartModel().series.length === 0"
+      matTooltip="Export loaded series to Excel"
+    >
+      <mat-icon>download</mat-icon>
+      Excel
+    </button>
+  </header>
+
+  @if (catalogError(); as message) {
+    <app-status-banner title="Chart catalog unavailable" [detail]="message" tone="error" icon="error" />
+  } @else if (catalogLoading() && catalog().length === 0) {
+    <app-status-banner title="Loading chart quantities…" [busy]="true" />
+  } @else {
+    <div class="charts__layout">
+      <aside class="knox-card charts__picker" aria-label="Quantity picker">
+        <header class="charts__picker-head">
+          <h3 class="charts__picker-title">Quantities</h3>
+          <p class="knox-muted">
+            Same unit overlays on one axis. A second unit uses the right Y-axis.
+          </p>
+        </header>
+
+        <div class="charts__groups">
+          @for (group of fieldsByGroup(); track group.unit) {
+            <section class="charts__group">
+              <h4 class="charts__group-title">{{ group.unit || 'other' }}</h4>
+              @for (field of group.fields; track field.id) {
+                <mat-checkbox
+                  class="charts__field"
+                  [checked]="isSelected(field.id)"
+                  (change)="toggleField(field, $event.checked)"
+                >
+                  <span class="charts__field-text">
+                    <span class="charts__field-name">{{ field.title }}</span>
+                    <span class="knox-muted charts__field-id">{{ field.id }}</span>
+                  </span>
+                </mat-checkbox>
+              }
+            </section>
+          }
+        </div>
+      </aside>
+
+      <section class="knox-card knox-card--flush charts__plot">
+        @if (seriesLoading()) {
+          <mat-progress-bar mode="indeterminate" />
+        }
+
+        @if (seriesError(); as message) {
+          <div class="charts__banner">
+            <app-status-banner title="Series unavailable" [detail]="message" tone="error" icon="error" />
+          </div>
+        }
+
+        <div class="charts__meta knox-muted">
+          @if (loadedFrom() && loadedTo()) {
+            <span>{{ loadedFrom() }} – {{ loadedTo() }}</span>
+          }
+          @if (axisUnits().length === 2) {
+            <span>· Dual axis: {{ axisUnits()[0] }} / {{ axisUnits()[1] }}</span>
+          } @else if (axisUnits().length === 1) {
+            <span>· Axis: {{ axisUnits()[0] }}</span>
+          }
+          <span>· Zoom and pan on the X-axis</span>
+        </div>
+
+        <app-time-series-chart [model]="chartModel()" ariaLabel="Device quantity chart" />
+      </section>
+    </div>
+  }
+</div>

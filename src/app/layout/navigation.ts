@@ -10,6 +10,7 @@ export interface NavigationItem {
 export const NAVIGATION_ITEMS: readonly NavigationItem[] = [
   { path: '/dashboard', label: 'Energy flow', shortLabel: 'Flow', icon: 'bolt' },
   { path: '/history', label: 'Data logger', shortLabel: 'History', icon: 'history' },
+  { path: '/charts', label: 'Charts', shortLabel: 'Charts', icon: 'show_chart' },
   { path: '/controls', label: 'Inverter settings', shortLabel: 'Settings', icon: 'tune' },
   { path: '/alarms', label: 'Alarms', shortLabel: 'Alarms', icon: 'notifications_active' },
   { path: '/diagnostics', label: 'Diagnostics', shortLabel: 'Debug', icon: 'terminal' },

@@ -1,7 +1,7 @@
 import { I as EventEmitter, T as DOCUMENT, U as InjectionToken, et as NgZone, sa as ɵɵdefineInjector, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { Cs as ɵɵstyleProp, Ga as ɵɵdomElement, Jt as Component, Nn as NgModule, Oi as setClassMetadata, Sn as Input, Va as ɵɵdefineNgModule, Wn as Renderer2, Xa as ɵɵdomElementStart, Ya as ɵɵdomElementEnd, Yi as ɵɵadvance, aa as ɵɵclassProp, fn as ElementRef, ia as ɵɵclassMap, la as ɵɵconditionalCreate, pr as ViewEncapsulation, r as ChangeDetectorRef, ra as ɵɵattribute, rt as numberAttribute, sa as ɵɵconditional, za as ɵɵdefineComponent, zn as Output } from "./core-tK2ALGvq.js";
-import { t as BidiModule } from "./bidi-BWzGJE9s.js";
 import { r as _getAnimationsState } from "./_animation-chunk-pUo7iRBP.js";
+import { t as BidiModule } from "./bidi-BWzGJE9s.js";
 //#region node_modules/@angular/material/fesm2022/progress-bar.mjs
 function MatProgressBar_Conditional_2_Template(rf, ctx) {
 	if (rf & 1) ɵɵdomElement(0, "div", 2);

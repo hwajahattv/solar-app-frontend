@@ -1,14 +1,14 @@
 import { Bi as signal, Mn as forwardRef, U as InjectionToken, c as computed, et as NgZone, xr as inject, yn as effect } from "./_resource-chunk-BKjjpPrA.js";
 import { A as contentChild, Ba as ɵɵdefineDirective, Ds as ɵɵtemplateRefExtractor, Es as ɵɵtemplate, Fo as ɵɵnextContext, Ga as ɵɵdomElement, Gn as RendererFactory2, Gs as ɵɵviewQuery, Ho as ɵɵprojection, Ji as ɵɵProvidersFeature, Jt as Component, Ks as ɵɵviewQuerySignal, No as ɵɵlistener, Oi as setClassMetadata, Os as ɵɵtext, Po as ɵɵloadQuery, Qa as ɵɵdomProperty, S as ViewChild, Sn as Input, T as afterRenderEffect, Ua as ɵɵdefineService, Uo as ɵɵprojectionDef, Wn as Renderer2, Wo as ɵɵproperty, Xa as ɵɵdomElementStart, Ya as ɵɵdomElementEnd, Yi as ɵɵadvance, Zn as Service, a as ContentChildren, aa as ɵɵclassProp, ao as ɵɵelementStart, da as ɵɵcontentQuerySignal, eo as ɵɵelement, fn as ElementRef, gt as viewChild, i as ContentChild, io as ɵɵelementEnd, is as ɵɵreference, ks as ɵɵtextInterpolate, la as ɵɵconditionalCreate, ns as ɵɵqueryRefresh, pr as ViewEncapsulation, r as ChangeDetectorRef, ra as ɵɵattribute, sa as ɵɵconditional, ts as ɵɵqueryAdvance, ua as ɵɵcontentQuery, un as Directive, za as ɵɵdefineComponent } from "./core-tK2ALGvq.js";
 import { D as shareReplay, Qn as Subject, U as pairwise, Xt as filter, g as takeUntil, rr as Observable, tn as merge, ur as Subscription, vn as map, x as startWith } from "./esm5-ChK3bs0s.js";
-import { i as Directionality } from "./bidi-BWzGJE9s.js";
+import "./a11y-BlmDWDL_.js";
 import { Y as NgTemplateOutlet } from "./common-Cxsxcxqt.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
-import "./a11y-mRNReBoK.js";
 import { t as _IdGenerator } from "./_id-generator-chunk-V8B_YRh_.js";
+import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
 import "./platform-BpbWXFth.js";
 import { t as coerceBooleanProperty } from "./coercion-COuovbg1.js";
-import { n as _animationsDisabled } from "./_animation-chunk-pUo7iRBP.js";
+import { i as Directionality } from "./bidi-BWzGJE9s.js";
 //#region node_modules/@angular/cdk/fesm2022/observers-private.mjs
 var loopLimitExceededErrorHandler = (e) => {
 	if (e instanceof ErrorEvent && e.message === "ResizeObserver loop limit exceeded") console.error(`${e.message}. This could indicate a performance issue with your app. See https://github.com/WICG/resize-observer/blob/master/explainer.md#error-handling`);

@@ -1,9 +1,9 @@
 import { Bi as signal, D as DestroyRef, Mn as forwardRef, T as DOCUMENT, U as InjectionToken, W as Injector, _ as untracked, et as NgZone, sa as ɵɵdefineInjector, xr as inject, yn as effect } from "./_resource-chunk-BKjjpPrA.js";
 import { Ba as ɵɵdefineDirective, Cs as ɵɵstyleProp, Ga as ɵɵdomElement, Gn as RendererFactory2, Gs as ɵɵviewQuery, Ho as ɵɵprojection, Ji as ɵɵProvidersFeature, Jt as Component, Ki as ɵɵInheritDefinitionFeature, Nn as NgModule, O as booleanAttribute, Oi as setClassMetadata, Po as ɵɵloadQuery, S as ViewChild, Sn as Input, Ua as ɵɵdefineService, Uo as ɵɵprojectionDef, Va as ɵɵdefineNgModule, Vt as ApplicationRef, Wn as Renderer2, Xa as ɵɵdomElementStart, Ya as ɵɵdomElementEnd, Yi as ɵɵadvance, Zn as Service, aa as ɵɵclassProp, fn as ElementRef, fo as ɵɵgetInheritedFactory, fr as ViewContainerRef, ir as TemplateRef, ns as ɵɵqueryRefresh, p as IterableDiffers, pr as ViewEncapsulation, qi as ɵɵNgOnChangesFeature, r as ChangeDetectorRef, un as Directive, vr as afterNextRender, za as ɵɵdefineComponent, zn as Output } from "./core-tK2ALGvq.js";
 import { D as shareReplay, Dn as isObservable, Qn as Subject, U as pairwise, Ut as auditTime, Vn as animationFrameScheduler, Xt as filter, b as switchMap, g as takeUntil, gt as distinctUntilChanged, jn as of, qn as asapScheduler, rr as Observable, tr as ConnectableObservable, ur as Subscription, x as startWith } from "./esm5-ChK3bs0s.js";
-import { i as Directionality, t as BidiModule } from "./bidi-BWzGJE9s.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
 import { n as coerceNumberProperty, t as coerceElement } from "./_element-chunk-BARXOZho.js";
+import { i as Directionality, t as BidiModule } from "./bidi-BWzGJE9s.js";
 //#region node_modules/@angular/cdk/fesm2022/_scrolling-chunk.mjs
 var RtlScrollAxisType;
 (function(RtlScrollAxisType) {

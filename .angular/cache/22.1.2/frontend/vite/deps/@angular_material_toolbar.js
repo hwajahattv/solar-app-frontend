@@ -1,8 +1,8 @@
 import { T as DOCUMENT, sa as ɵɵdefineInjector, xr as inject } from "./_resource-chunk-BKjjpPrA.js";
 import { Ba as ɵɵdefineDirective, Ho as ɵɵprojection, Jt as Component, Nn as NgModule, Oi as setClassMetadata, Po as ɵɵloadQuery, Sn as Input, Uo as ɵɵprojectionDef, Va as ɵɵdefineNgModule, a as ContentChildren, aa as ɵɵclassProp, fn as ElementRef, ia as ɵɵclassMap, ns as ɵɵqueryRefresh, pr as ViewEncapsulation, ua as ɵɵcontentQuery, un as Directive, za as ɵɵdefineComponent } from "./core-tK2ALGvq.js";
-import { t as BidiModule } from "./bidi-BWzGJE9s.js";
 import { t as Platform } from "./_platform-chunk-BYvSK3Nc.js";
 import "./platform-BpbWXFth.js";
+import { t as BidiModule } from "./bidi-BWzGJE9s.js";
 //#region node_modules/@angular/material/fesm2022/toolbar.mjs
 var _c0 = ["*", [["mat-toolbar-row"]]];
 var _c1 = ["*", "mat-toolbar-row"];
