@@ -1,0 +1,115 @@
+<div class="knox-page">
+  <header class="knox-row header">
+    <h2 class="knox-section-title">Daily energy</h2>
+    <span class="knox-spacer"></span>
+
+    <div class="header__presets">
+      <button mat-stroked-button type="button" (click)="setPreset(7)">7 days</button>
+      <button mat-stroked-button type="button" (click)="setPreset(30)">30 days</button>
+      <button mat-stroked-button type="button" (click)="setPreset(90)">90 days</button>
+    </div>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="header__date">
+      <mat-label>From</mat-label>
+      <input matInput [matDatepicker]="fromPicker" [ngModel]="fromDate()" (ngModelChange)="fromDate.set($event)" />
+      <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+      <mat-datepicker #fromPicker />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic" class="header__date">
+      <mat-label>To</mat-label>
+      <input matInput [matDatepicker]="toPicker" [ngModel]="toDate()" (ngModelChange)="toDate.set($event)" />
+      <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
+      <mat-datepicker #toPicker />
+    </mat-form-field>
+
+    <button mat-stroked-button type="button" (click)="reload()" [disabled]="loading() || !!rangeError()">
+      <mat-icon>refresh</mat-icon>
+      Reload
+    </button>
+  </header>
+
+  <app-status-banner
+    title="Stored daily totals"
+    detail="Values are saved when the dashboard refreshes live energy totals. Open the dashboard at least once per day to build history."
+    tone="info"
+    icon="info"
+  />
+
+  @if (rangeError(); as message) {
+    <app-status-banner title="Invalid date range" [detail]="message" tone="warn" icon="event_busy" />
+  }
+
+  @if (error(); as message) {
+    <app-status-banner title="Daily energy unavailable" [detail]="message" tone="error" icon="error" />
+  } @else if (loading() && !history()) {
+    <app-status-banner title="Loading daily energy…" [busy]="true" />
+  }
+
+  @if (loading()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+
+  @if (history(); as result) {
+    <section class="knox-card chart-panel">
+      <h3 class="knox-section-title">Trend</h3>
+      <p class="knox-muted chart-panel__hint">
+        {{ result.from }} to {{ result.to }} · {{ records().length }} day(s) stored
+      </p>
+      <app-time-series-chart
+        class="chart-panel__chart"
+        [model]="chartModel()"
+        ariaLabel="Daily energy history chart"
+      />
+    </section>
+
+    @if (records().length === 0) {
+      <app-status-banner
+        title="No stored records for this range"
+        detail="Ensure DATABASE_URL is configured on the gateway and visit the dashboard to capture today's totals."
+        tone="warn"
+        icon="storage"
+      />
+    } @else {
+      <section class="knox-card knox-card--flush table-panel">
+        <h3 class="table-panel__title knox-section-title">Daily breakdown</h3>
+        <div class="knox-scroll-x">
+          <table class="energy-table">
+            <thead>
+              <tr>
+                <th scope="col">Day</th>
+                <th scope="col">Generated (kWh)</th>
+                <th scope="col">Consumed (kWh)</th>
+                <th scope="col">Battery stored (kWh)</th>
+                <th scope="col">Battery supplied (kWh)</th>
+                <th scope="col">Last updated</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (row of records(); track row.day) {
+                <tr>
+                  <th scope="row">{{ row.day }}</th>
+                  <td>{{ row.generatedTodayKwh | metricValue: 2 }}</td>
+                  <td>{{ row.consumedTodayKwh | metricValue: 2 }}</td>
+                  <td>{{ row.batteryChargedTodayKwh | metricValue: 2 }}</td>
+                  <td>{{ row.batteryDischargedTodayKwh | metricValue: 2 }}</td>
+                  <td class="energy-table__muted">{{ row.computedAt | date: 'medium' }}</td>
+                </tr>
+              }
+            </tbody>
+            <tfoot>
+              <tr class="energy-table__totals">
+                <th scope="row">Range total</th>
+                <td>{{ totals().generatedTodayKwh | metricValue: 2 }}</td>
+                <td>{{ totals().consumedTodayKwh | metricValue: 2 }}</td>
+                <td>{{ totals().batteryChargedTodayKwh | metricValue: 2 }}</td>
+                <td>{{ totals().batteryDischargedTodayKwh | metricValue: 2 }}</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+    }
+  }
+</div>

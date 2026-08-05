@@ -9,6 +9,7 @@ export interface NavigationItem {
 /** Single source of truth for navigation, reused by the rail and the bottom bar. */
 export const NAVIGATION_ITEMS: readonly NavigationItem[] = [
   { path: '/dashboard', label: 'Energy flow', shortLabel: 'Flow', icon: 'bolt' },
+  { path: '/daily-energy', label: 'Daily energy', shortLabel: 'Energy', icon: 'energy_savings_leaf' },
   { path: '/history', label: 'Data logger', shortLabel: 'History', icon: 'history' },
   { path: '/charts', label: 'Charts', shortLabel: 'Charts', icon: 'show_chart' },
   { path: '/controls', label: 'Inverter settings', shortLabel: 'Settings', icon: 'tune' },

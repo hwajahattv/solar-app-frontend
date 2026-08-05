@@ -32,6 +32,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/charts/charts').then((m) => m.Charts),
   },
   {
+    path: 'daily-energy',
+    title: 'Daily energy · Knox Solar',
+    loadComponent: () => import('./features/daily-energy/daily-energy').then((m) => m.DailyEnergy),
+  },
+  {
     path: 'diagnostics',
     title: 'Diagnostics · Knox Solar',
     loadComponent: () => import('./features/diagnostics/diagnostics').then((m) => m.Diagnostics),
