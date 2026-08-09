@@ -205,20 +205,49 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.1rem;
-  font: var(--mat-sys-label-small);
   color: #fff;
   text-shadow: 0 1px 2px rgb(0 0 0 / 55%);
+}
+
+.diagram__battery-soc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  font: var(--mat-sys-label-small);
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .diagram__battery-icon {
   font-size: 0.8rem;
   width: 0.8rem;
   height: 0.8rem;
+  line-height: 0.8rem;
 }
 
-// The bar already reads out SOC, so the duplicate number above it only costs
-// height and makes the node collide with its neighbours.
+/* Estimated charging/discharging time */
+.diagram__battery-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-top: 0.2rem;
+  font: var(--mat-sys-label-small);
+  font-size: 0.65rem;
+  line-height: 1;
+  color: var(--knox-text-muted);
+  white-space: nowrap;
+}
+
+.diagram__battery-mode {
+  font-weight: 500;
+}
+
+/*
+ * The bar already reads out SOC, so the duplicate number above it
+ * only costs height and makes the node collide with its neighbours.
+ */
 .diagram__node[data-position='battery'] .diagram__primary {
   display: none;
 }

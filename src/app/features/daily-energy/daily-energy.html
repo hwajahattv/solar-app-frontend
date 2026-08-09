@@ -93,7 +93,7 @@
                   <td>{{ row.consumedTodayKwh | metricValue: 2 }}</td>
                   <td>{{ row.batteryChargedTodayKwh | metricValue: 2 }}</td>
                   <td>{{ row.batteryDischargedTodayKwh | metricValue: 2 }}</td>
-                  <td class="energy-table__muted">{{ row.computedAt | date: 'medium' }}</td>
+                  <td class="energy-table__muted">{{ row.computedAt | date: 'dd/MM/yyyy HH:mm' }}</td>
                 </tr>
               }
             </tbody>

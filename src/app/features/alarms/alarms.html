@@ -43,11 +43,12 @@
         <dl class="alarm__timeline">
           <div>
             <dt>Started</dt>
-            <dd>{{ alarm.startedAt ? (alarm.startedAt | date: 'medium') : '—' }}</dd>
+            
+            <dd>{{ alarm.startedAt ? (alarm.startedAt | date: 'dd/MM/yyyy HH:mm') : '—' }}</dd>
           </div>
           <div>
             <dt>Cleared</dt>
-            <dd>{{ alarm.clearedAt ? (alarm.clearedAt | date: 'medium') : 'Still active' }}</dd>
+            <dd>{{ alarm.clearedAt ? (alarm.clearedAt | date: 'dd/MM/yyyy HH:mm') : 'Still active' }}</dd>
           </div>
           <div>
             <dt>{{ alarm.active ? 'Active for' : 'Duration' }}</dt>
@@ -133,8 +134,8 @@
                 <tbody>
                   @for (alarm of group.alarms; track $index + (alarm.startedAt ?? '') + (alarm.clearedAt ?? '')) {
                     <tr [class.analysis-table__row--active]="alarm.active">
-                      <td>{{ alarm.startedAt ? (alarm.startedAt | date: 'medium') : '—' }}</td>
-                      <td>{{ alarm.clearedAt ? (alarm.clearedAt | date: 'medium') : '—' }}</td>
+                      <td>{{ alarm.startedAt ? (alarm.startedAt | date: 'dd/MM/yyyy HH:mm') : '—' }}</td>
+                      <td>{{ alarm.clearedAt ? (alarm.clearedAt | date: 'dd/MM/yyyy HH:mm') : '—' }}</td>
                       <td>{{ elapsed(alarm) | duration }}</td>
                       <td>
                         <span class="pill" [class.pill--active]="alarm.active">

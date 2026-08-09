@@ -38,6 +38,77 @@ interface FlowNode {
 export class EnergyFlowDiagram {
   readonly flow = input.required<EnergyFlow>();
 
+  readonly batteryRemainingTime = computed(() => {
+    const battery = this.flow().battery;
+
+    if (battery.soc === null) {
+      return null;
+    }
+
+    // 25.8V × 100Ah = 2580Wh
+    const capacityWh = 25.8 * 100;
+
+    // CHARGING
+    if (battery.charging) {
+      const chargingPower =
+        battery.power !== null
+          ? Math.abs(battery.power)
+          : battery.voltage !== null && battery.chargeCurrent !== null
+            ? battery.voltage * battery.chargeCurrent
+            : 0;
+
+      if (chargingPower <= 0) {
+        return null;
+      }
+
+      const remainingCapacityWh = capacityWh * ((100 - battery.soc) / 100);
+
+      const hours = remainingCapacityWh / chargingPower;
+
+      return this.formatDuration(hours);
+    }
+
+    // DISCHARGING
+    if (battery.discharging) {
+      const dischargingPower =
+        battery.power !== null
+          ? Math.abs(battery.power)
+          : battery.voltage !== null && battery.dischargeCurrent !== null
+            ? battery.voltage * battery.dischargeCurrent
+            : 0;
+
+      if (dischargingPower <= 0) {
+        return null;
+      }
+
+      const remainingCapacityWh = capacityWh * (battery.soc / 100);
+
+      const hours = remainingCapacityWh / dischargingPower;
+
+      return this.formatDuration(hours);
+    }
+
+    // IDLE
+    return null;
+  });
+
+  private formatDuration(hours: number): string {
+    const totalMinutes = Math.round(hours * 60);
+
+    const h = Math.floor(totalMinutes / 60);
+    const m = totalMinutes % 60;
+
+    if (h === 0) {
+      return `${m}m`;
+    }
+
+    if (m === 0) {
+      return `${h}h`;
+    }
+
+    return `${h}h ${m}m`;
+  }
+
   protected readonly wires = computed<FlowWire[]>(() => {
     const flow = this.flow();
     const batteryCharging = flow.battery.charging && !flow.battery.discharging;
@@ -83,7 +154,8 @@ export class EnergyFlowDiagram {
   protected readonly nodes = computed<FlowNode[]>(() => {
     const flow = this.flow();
     const batteryCharging = flow.battery.charging && !flow.battery.discharging;
-    const loadKw = flow.load.activePower === null ? '—' : `${format(flow.load.activePower / 1000, 2)} kW`;
+    const loadKw =
+      flow.load.activePower === null ? '—' : `${format(flow.load.activePower / 1000, 2)} kW`;
 
     return [
       {
@@ -141,7 +213,9 @@ export class EnergyFlowDiagram {
     ];
   });
 
-  protected readonly batteryPercent = computed(() => Math.max(0, Math.min(100, this.flow().battery.soc ?? 0)));
+  protected readonly batteryPercent = computed(() =>
+    Math.max(0, Math.min(100, this.flow().battery.soc ?? 0)),
+  );
 
   /** Hue sweeps red at empty to green at full, matching the original dashboard. */
   protected readonly batteryHue = computed(() => this.batteryPercent() * 1.2);
