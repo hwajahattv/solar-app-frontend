@@ -252,6 +252,20 @@
   display: none;
 }
 
+.battery-mode-short {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .battery-mode-full {
+    display: none;
+  }
+
+  .battery-mode-short {
+    display: inline;
+  }
+}
+
 /* --- Phones and other very narrow columns --------------------------------- */
 
 @container flowdiagram (max-width: 400px) {

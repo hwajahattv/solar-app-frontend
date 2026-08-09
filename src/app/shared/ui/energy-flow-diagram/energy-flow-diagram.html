@@ -48,7 +48,12 @@
     @if (batteryRemainingTime()) {
     <div class="diagram__battery-time">
       <span class="diagram__battery-mode">
-        {{ batteryCharging() ? 'Charging' : 'Discharging' }}
+        <span class="battery-mode-full">
+          {{ batteryCharging() ? 'Charging' : 'Discharging' }}
+        </span>
+        <span class="battery-mode-short">
+          {{ batteryCharging() ? '⚡' : '↓' }}
+        </span>
       </span>
       <span>~{{ batteryRemainingTime() }}</span>
     </div>
